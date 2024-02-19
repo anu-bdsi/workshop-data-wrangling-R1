@@ -1,6 +1,7 @@
 ---
-title: "Data Wrangling with R (Part 1)"
+title: "Data Wrangling with R [Part 1]{.part-label}"
 date: 2024/04/08
+categories: BDSI Workshop
 ---
 
 

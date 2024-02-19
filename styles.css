@@ -1,5 +1,11 @@
 /* css styles */
 
+.part-label {
+  font-variant: small-caps;
+  font-size:0.45em; 
+  font-weight: bold;
+}
+
 .tag-label {
   font-size:0.45em; 
   line-height:1em; 

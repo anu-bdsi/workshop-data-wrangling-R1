@@ -1,6 +1,6 @@
 ---
 title: "Pivot data with [tidyr]{style='font-family:monospace;'}"
-subtitle: "[ANU BDSI<br>workshop]{.tag-label} [Data Wrangling with R (Part 1)]{.tag-workshop}"
+subtitle: "[[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R [Part 1]{.part-label}]{.tag-workshop}"
 format:
   anu-light-revealjs:
     width: 1920

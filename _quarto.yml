@@ -5,7 +5,7 @@ project:
    - "!slides/*"
 
 website:
-  title: "[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R (Part 1)"
+  title: "[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R [Part 1]{.part-label}"
   navbar:
     left:
       - href: index.qmd
