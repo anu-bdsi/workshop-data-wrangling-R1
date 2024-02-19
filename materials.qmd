@@ -1,11 +1,22 @@
 ---
 title: "Materials"
 date: 04/08/2024
+engine: knitr
+format: 
+  html:
+    css: assets/webex.css
+    include-after-body: assets/webex.js
 ---
 
+```{r setup, include = FALSE}
+library(webexercises)
+ex_tabset <- function(id) {
+  paste0("[_Exercise ", id, "_](#tabset-1-", id, "-tab){onclick=",
+         'document.getElementById(', "'tabset-1-", id, "-tab').click();",
+         '}')
+}
+```
 
-
-{{< include _learning-objectives.qmd >}}
 
 
 
@@ -14,55 +25,33 @@ date: 04/08/2024
 
 Time | Content 
 :-----------|:-----------------|
-10.00-10.20 | [Introduction](slides/slide1.html){target="_blank"} |     
+10.00-10.20 | [Welcome to Tidyverse](slides/slide1.html){target="_blank"} |     
+10.20-10.30 | `r ex_tabset(1)` |     
+10.30-10.50 | [Data wrangling with `dplyr`](slides/slide2.html){target="_blank"} |     
+10.50-11.10 | `r ex_tabset(2)` |      
+11.10-11.20 | [Pivot data with `tidyr`](slides/slide3.html){target="_blank"} |     
+11.20-11.40 | `r ex_tabset(3)` |     
+11.40-12.00 | [Relational data](slides/slide4.html){target="_blank"} |     
+12.00-12.20 | `r ex_tabset(4)` |     
+12.50-13.00 | [Wrap up](slides/slide5.html){target="_blank"} |     
+
 
 ## 📑 Resources
 
-- Learn R Chapter 1: Getting started with R & RStudio [{{< fa link >}}](https://learnr.numbat.space/chapter1){target="_blank"}
-- Learn R Chapter 2: R programming basics [{{< fa link >}}](https://learnr.numbat.space/chapter2){target="_blank"}
-- Learn R Chapter 3: Troubleshooting and asking for help [{{< fa link >}}](https://learnr.numbat.space/chapter3){target="_blank"}
-- Learn R Chapter 4: Project structure and importing data [{{< fa link >}}](https://learnr.numbat.space/chapter4){target="_blank"}
+- Learn R Chapter 5: Data wrangling with R [{{< fa link >}}](https://learnr.numbat.space/chapter5){target="_blank"}
 
 ## 🏋️‍♀️ Exercises
 
-### Exercise 1
+::: panel-tabset
 
-Go through the exercises in [Learn R Chapter 2: R programming basics](https://learnr.numbat.space/chapter2){target="_blank"} (you can skip the Matrices section).
-
-### Exercise 2
-
-The following are all the datasets for this training workshop. Download these and try to read this into R. 
+## Exercise 1
 
 
-- <a href='data/brief-access-lick-data-latency.csv' download>brief-access-lick-data-latency.csv</a>
-- <a href='data/brief-access-lick-data.xlsx' download>brief-access-lick-data.xlsx</a>
-- <a href='data/ch-study-mock-data.xlsx' download>ch-study-mock-data.xlsx</a>
-- <a href='data/complex-formation.csv' download>complex-formation.csv</a>
-- <a href='data/cuzick-2010-breast-cancer-density.csv' download>cuzick-2010-breast-cancer-density.csv</a>
-- <a href='data/guich-feed-data.csv' download>guich-feed-data.csv</a>
-- <a href='data/kingston-data.xlsx' download>kingston-data.xlsx</a>
-- <a href='data/marcato-2021-immunity.csv' download>marcato-2021-immunity.csv</a>
-- <a href='data/overview-20220413-CD45freq-recomp-counts.csv' download>overview-20220413-CD45freq-recomp-counts.csv</a>
+## Exercise 2
+
+## Exercise 3
+
+## Exercise 4
 
 
-
-### Exercise 3
-
-*The following exercise is written by Dr. Terry Neeman with slight modifications.*
-
-We will look at the `penguins` dataset that is contained in the `palmerpenguins` package. For more details about the data, see [here](https://allisonhorst.github.io/palmerpenguins/).
-
-```r
-library(palmerpenguins)
-data(penguins)
-```
-
-Using this data, answer the following questions.
-
-1. Produce a numerical summary of the data. 
-1. How many species were studied? 
-1. How many islands are there in the data?
-1. Did they find all species on every island?
-1. For each biometric measure, are there difference between the species?
-1. Explore the associations between the biometric measurements bill length, bill depth, flipper length and body mass. 
-1. Are there differences in these associations between species?
+:::

@@ -1,0 +1,18 @@
+---
+title: "Pivot data with [tidyr]{style='font-family:monospace;'}"
+subtitle: "[ANU BDSI<br>workshop]{.tag-label} [Data Wrangling with R (Part 1)]{.tag-workshop}"
+format:
+  anu-light-revealjs:
+    width: 1920
+    height: 1080
+    auto-stretch: false
+    html-math-method: katex
+    self-contained: true
+    css: assets/custom.css
+    footer: anu-bdsi.github.io/workshop-data-wrangling-R1/
+author: Emi Tanaka
+institute: Biological Data Science Institute
+date: 2024/04/08
+date-format: "D[th] MMMM YYYY"
+---
+

@@ -1,15 +1,18 @@
 ---
-title: "BDSI Workshop"
-subtitle: "Data Wrangling with R (Beginner)"
+title: "Data Wrangling with R (Part 1)"
+date: 2024/04/08
 ---
 
 
-## Welcome 👋
+## 👋 Welcome 
 
-This is a training workshop for R beginners offered by the Australian National University (ANU) Biological Data Science Institute (BDSI).
+This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).
 
+## 🎯 Learning objectives 
 
-{{< include _learning-objectives.qmd >}}
+Upon completion of the workshop, participants should be able to
+
+{{< include slides/_learning-objectives.qmd >}}
 
 ## 🔧 Preperation 
 
@@ -21,12 +24,7 @@ Please ensure that you download and install
 - the following packages by opening RStudio Desktop, then copy and paste the command below in the Console section, pushing Enter after pasting.
 
 ```r
-install.packages(c("tidyverse", "rmarkdown", "janitor", 
-                   "readxl", "gtsummary", "lme4", 
-                   "emmeans", "lmerTest", "ggResidpanel",
-                   "reprex", "palmerpenguins", "quarto",
-                   "report", "correlation", "see",
-                   "parameters", "ggbeeswarm", "hexbin"))
+install.packages(c("tidyverse", "rmarkdown", "janitor", "agridat"))
 ```
 
 {{< fa hand-holding-medical >}} If you are having issues, see also [here](https://learnr.numbat.space/chapter1) or talk to the teaching team.
@@ -47,13 +45,13 @@ install.packages(c("tidyverse", "rmarkdown", "janitor",
 
 :::
 
-## 👩‍🏫👨‍🏫 Teaching team 
+## 👩‍🏫 Teaching team 
 
 ::: {layout-ncol=3 style="text-align:center;"}
 
 
 ![Dr. Emi Tanaka](slides/images/team/emi-square.png){.circle-image-120}
 
-![Helper](slides/images/team/dummy.jpg){.circle-image-120}
+![Helper TBD](slides/images/team/dummy.jpg){.circle-image-120}
 
 :::
