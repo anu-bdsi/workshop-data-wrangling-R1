@@ -1,5 +1,5 @@
 - Understand the difference between Base and Tidyverse paradigms
-- Recall and identify tidy data
+- Identify tidy data
 - Know how to add/modify a column, subset the data by row and column, rename column names and perform group operations using `dplyr`
 - Pivot data to longer and wider format using `tidyr`
 - Join two datasets using `dplyr`
