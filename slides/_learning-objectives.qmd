@@ -1,6 +1,6 @@
-- Understand the difference between Base and Tidyverse paradigms
-- Identify tidy data
-- Know how to add/modify a column, subset the data by row and column, rename column names and perform group operations using `dplyr`
-- Pivot data to longer and wider format using `tidyr`
-- Join two datasets using `dplyr`
+- Differentiate between the Base and Tidyverse paradigms
+- Recognize the characteristics of tidy data
+- Acquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using  `dplyr`
+- Pivot data into longer or wider format using `tidyr`
+- Join datasets using `dplyr`
 
