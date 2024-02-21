@@ -18,14 +18,14 @@
     "href": "index.html",
     "title": "Data Wrangling with R Part 1",
     "section": "",
-    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. This workshop is tailored for beginners in the Tidyverse, specifically those with minimal or no exposure to the dplyr and tidyr packages. A basic understanding of R is assumed. Individuals with no prior R knowledge are advised not to enroll in this workshop.\nThis website is brought to you by the ANU Biological Data Science Institute."
+    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. This workshop is tailored for beginners in the Tidyverse, specifically those with minimal or no exposure to the dplyr and tidyr packages. A basic understanding of R is assumed. Individuals with no prior R knowledge are advised to attend the Introduction to R Programming workshop prior to this workshop. Please do not enrol in this workshop if you have no R knowledge at the start of this workshop.\nThis website is brought to you by the ANU Biological Data Science Institute."
   },
   {
     "objectID": "index.html#welcome",
     "href": "index.html#welcome",
     "title": "Data Wrangling with R Part 1",
     "section": "",
-    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. This workshop is tailored for beginners in the Tidyverse, specifically those with minimal or no exposure to the dplyr and tidyr packages. A basic understanding of R is assumed. Individuals with no prior R knowledge are advised not to enroll in this workshop."
+    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. This workshop is tailored for beginners in the Tidyverse, specifically those with minimal or no exposure to the dplyr and tidyr packages. A basic understanding of R is assumed. Individuals with no prior R knowledge are advised to attend the Introduction to R Programming workshop prior to this workshop. Please do not enrol in this workshop if you have no R knowledge at the start of this workshop."
   },
   {
     "objectID": "index.html#learning-objectives",
