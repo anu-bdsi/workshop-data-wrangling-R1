@@ -18,21 +18,21 @@
     "href": "index.html",
     "title": "Data Wrangling with R Part 1",
     "section": "",
-    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. The workshop is designed for beginners to Tidyverse, in particular, for those who have little to no experience using dplyr and tidyr packages. Some knowledge in the basic use of R is expected. Please do not attend this if you are not already familiar with R.\nThis website is brought to you by the ANU Biological Data Science Institute."
+    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. This workshop is tailored for beginners in the Tidyverse, specifically those with minimal or no exposure to the dplyr and tidyr packages. A basic understanding of R is assumed. Individuals with no prior R knowledge are advised not to enroll in this workshop.\nThis website is brought to you by the ANU Biological Data Science Institute."
   },
   {
     "objectID": "index.html#welcome",
     "href": "index.html#welcome",
     "title": "Data Wrangling with R Part 1",
     "section": "",
-    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. The workshop is designed for beginners to Tidyverse, in particular, for those who have little to no experience using dplyr and tidyr packages. Some knowledge in the basic use of R is expected. Please do not attend this if you are not already familiar with R."
+    "text": "This is a training workshop for staff and students affiliated with the Australian National University (ANU) offered by the ANU Biological Data Science Institute (BDSI).\nThe workshop aims to teach data wrangling with R using the Tidyverse paradigm. Tidyverse is a popular collection of open source packages that share an underlying design philosophy, grammar and data structure. This workshop is tailored for beginners in the Tidyverse, specifically those with minimal or no exposure to the dplyr and tidyr packages. A basic understanding of R is assumed. Individuals with no prior R knowledge are advised not to enroll in this workshop."
   },
   {
     "objectID": "index.html#learning-objectives",
     "href": "index.html#learning-objectives",
     "title": "Data Wrangling with R Part 1",
     "section": "🎯 Learning objectives",
-    "text": "🎯 Learning objectives\nUpon completion of the workshop, participants should be able to\n\nUnderstand the difference between Base and Tidyverse paradigms\nIdentify tidy data\nKnow how to add/modify a column, subset the data by row and column, rename column names and perform group operations using dplyr\nPivot data to longer and wider format using tidyr\nJoin two datasets using dplyr"
+    "text": "🎯 Learning objectives\nUpon completion of the workshop, participants should be able to\n\nDifferentiate between the Base and Tidyverse paradigms\nRecognize the characteristics of tidy data\nAcquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using dplyr\nPivot data into longer or wider format using tidyr\nJoin datasets using dplyr"
   },
   {
     "objectID": "index.html#preperation",
