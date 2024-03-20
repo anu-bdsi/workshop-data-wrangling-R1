@@ -2,6 +2,7 @@
 title: "Data Wrangling with R [Part 1]{.part-label}"
 date: 2024/04/08
 categories: BDSI Workshop
+engine: knitr
 ---
 
 
@@ -50,11 +51,6 @@ install.packages(c("tidyverse", "rmarkdown", "janitor", "agridat"))
 
 ## 👩‍🏫 Teaching team 
 
-::: {layout-ncol=3 style="text-align:center;"}
+`r photo_path <- "slides/"`
 
-
-![Dr. Emi Tanaka](slides/images/team/emi-square.png){.circle-image-120}
-
-![Helper TBD](slides/images/team/dummy.jpg){.circle-image-120}
-
-:::
+{{< include slides/_team.qmd >}}
