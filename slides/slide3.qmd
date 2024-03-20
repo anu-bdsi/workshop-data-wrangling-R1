@@ -1,5 +1,5 @@
 ---
-title: "Pivot data with [tidyr]{style='font-family:monospace;'}"
+title: "A grammar of data manipulation"
 subtitle: "[[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R [Part 1]{.part-label}]{.tag-workshop}"
 format:
   anu-light-revealjs:
@@ -14,5 +14,14 @@ author: Emi Tanaka
 institute: Biological Data Science Institute
 date: 2024/04/08
 date-format: "D[th] MMMM YYYY"
+filters:
+  - webr
+webr: 
+  show-startup-message: false  
+  packages: 
+    - tidyverse
 ---
 
+## Grammar of data manipulation
+
+- `dplyr` is a core package of `tidyverse`
