@@ -14,6 +14,8 @@ author: Emi Tanaka
 institute: Biological Data Science Institute
 date: 2024/04/08
 date-format: "D[th] MMMM YYYY"
+execute: 
+  echo: true
 ---
 
 
@@ -22,30 +24,815 @@ date-format: "D[th] MMMM YYYY"
 
 ## Teaching team 
 
-::: {layout-ncol=3 style="text-align:center;"}
+`r photo_path <- ""`
+
+{{< include _team.qmd >}}
 
 
-![Dr. Emi Tanaka](images/team/emi-square.png){.circle-image-120}
-
-![Helper](images/team/dummy.jpg){.circle-image-120}
-
-
-:::
-
-::: incremental
-
-- Who are you?
-  - What statistical software have you used before?
-  - Introduce yourself to people around you
-    
-:::
 
 # Workshop materials
 
 ::: box
 
-All materials will be hosted at<br> [<https://anu-bdsi.github.io/workshop-intro-to-R/>]{.f-subheadline target="_blank"}
+All materials will be hosted at<br> [<https://anu-bdsi.github.io/workshop-data-wrangling-R1/>]{.f1 target="_blank"}
 
 :::
 
+## Today's learning objectives 
+
+{{< include _learning-objectives.qmd >}}
+
+## Tidyverse
+
+* **Tidyverse** refers to a collection of R-packages that share a common design philosophy, grammar and data structure.
+
+```{css, echo = FALSE}
+thead, tbody {
+  font-size: 0.8em;
+}
+
+```
+
+
+<center>
+<img height="130px" src="images/tidyverse.png"> <img height="100px" src="images/ggplot2.png"><img height="100px" src="images/dplyr.png"><img height="100px" src="images/tidyr.png"><img height="100px" src="images/readr.png"><img height="100px" src="images/tibble.png"><img height="100px" src="images/purrr.png"><img height="100px" src="images/stringr.png"><img height="100px" src="images/forcats.png"><img height="100px" src="images/lubridate.png">
+</center>
+
+* This trains your mental model to do data science tasks in a manner which may make it easier, faster, and/or fun for you to do these tasks.
+* `library(tidyverse)` is a shorthand for loading the 9 core tidyverse packages.
+
+```{r}
+#| warning: true
+library(tidyverse)
+```
+
+
+## Tidy data 
+
+::: callout-note
+
+## Definition of a tidy data (Wickham, 2014)
+
+* Each variable must have its own column
+* Each observation must have its own row
+* Each value must have its own cell
+
+:::
+
+<center>
+<img src="images/tidy-data.svg" width="90%">
+</center>
+
+- `dplyr`, `tidyr` and `ggplot2` are downstream packages to work with _tidy data_
+
+::: {.absolute bottom=0 .f3}
+
+Wickham (2014) Tidy Data. *Journal of Statistical Software*
+
+:::
+
+
+
+## Is this tidy data? [Part 1]{.f2}
+
+::: flex
+
+::: {.w-50}
+
+```{r, echo = FALSE}
+df1 <- tibble(state = c("NSW", "VIC", "ACT"),
+       `2019` = c(8130159, 6655284, 427892),
+       `2018` = c(80366651, 6528601, 423169),
+       `2017` = c(7919815, 6387081, 415874))
+knitr::kable(df1, caption = "Estimated residential population in December") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+::: {.w-50 .pl3 .fragment}
+
+```{r, echo = FALSE}
+df1 %>% 
+  pivot_longer(-state, names_to = "year", values_to = "population") %>% 
+  knitr::kable(caption = "Estimated residential population in December") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+:::
+
+
+
+
+
+::: {.absolute bottom=0 .f3}
+
+Values adapted from Australian Bureau of Statistics. (2020). Table 04. Estimated Resident Population, States and Territories [Time series spreadsheet]. National, state and territory population, Australia Mar 2020. Retrieved Nov 24, 2020. https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/mar-2020/310104.xls
+
+:::
+
+
+
+## Is this tidy data? [Part 2]{.f2}
+
+```{css, echo = FALSE}
+.ste tr {
+  font-size: 14pt!important;
+}
+.ste tr:nth-child(even)  { background: #cceeff!important; }
+.ste tr:nth-child(odd)  { background: #4dc3ff!important; }
+.ste th {background: #006699; color:white;}
+.scroll-vert {
+  height: 500px!important;
+  overflow:scroll;
+}
+```
+
+Total weekly personal income by age and sex from ABS 2016 Census
+
+
+```{r, echo = FALSE}
+# get package from 
+# remotes::install_github("emitanaka/dwexercise")
+data(census_2016_G17, package = "dwexercise")
+data(census_2016_STE, package = "dwexercise")
+census_2016_G17 %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_styling()
+```
+
+What do you think the headers mean?
+
+
+::: {.absolute bottom=0 .f3}
+
+Based on Australian Bureau of Statistics 2016 Census Data
+
+:::
+
+<!-- Note: above is using citation instruction from CreativeCommons_Licensing_readme.txt in the data pack with slight addition of 2016 Census -->
+
+
+<div class="bg-white" style="border:3px black solid;position:absolute;bottom:10px;right:10px;">
+```{r, echo = FALSE, eval = TRUE}
+census_2016_STE %>% 
+  knitr::kable(caption = "STE Code") %>% 
+  kableExtra::kable_styling(htmltable_class = "table ste")
+```
+</div>
+
+::: fragment
+
+<img style="border:3px black solid;position:absolute;top:22%;left:45%;" src="images/census-form.png">
+
+:::
+
+## Is this tidy data? [Part 3]{.f2} 
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+df3 <- census_2016_G17 %>% 
+  pivot_longer(-STE_CODE_2016,
+               values_to = "count",
+               names_to = "group") %>%
+  left_join(census_2016_STE, by = c("STE_CODE_2016" = "code")) %>% 
+  select(state = name, group, count) 
+
+df4 <- df3 %>% 
+  filter(!str_detect(group, "Tot")) %>% 
+  filter(!str_starts(group, "P")) %>% 
+  extract(group, 
+           into = c("sex", "income_min", "income_max", "age_min", "age_max"),
+           regex = "^([FM])_(\\d+|Neg_Nil|Negtve_Nil|PI)_(\\d+|more|income|incme|NS_ns|NS)_(\\d+)_?(\\d+)?",
+          remove = TRUE) %>% 
+  mutate(income_min = case_when(str_detect(income_min, "Neg") ~ -Inf,
+                                TRUE ~ as.numeric(income_min)),
+         income_max = case_when(income_max %in% c("income", "incme") ~ 0,
+                                income_max %in% "more" ~ Inf,
+                                    TRUE ~ as.numeric(income_max)),
+         age_min = as.numeric(age_min),
+         age_max = ifelse(age_max=="", Inf, as.numeric(age_max))) 
+df4 %>% 
+  head(10) %>% 
+  knitr::kable(caption = "Total weekly personal income by age and sex") %>% 
+  kableExtra::kable_styling()
+```
+
+
+::: {.absolute bottom=0 .f3}
+
+Based on Australian Bureau of Statistics 2016 Census Data
+
+:::
+
+
+
+## Is this tidy data? [Part 4]{.f2}
+
+
+::: flex
+
+::: {.w-50}
+
+```{r, echo = FALSE}
+data(nass.barley, package = "agridat")
+data(nass.wheat, package = "agridat")
+df5 <- rbind(mutate(nass.barley, crop = "barley"), 
+             mutate(nass.wheat, crop = "wheat")) %>% 
+  select(year, state, crop, yield, acres) %>% 
+  filter(state %in% c("Iowa", "Kansas")) %>% 
+  filter(year %in% c(1900, 2000))
+# have to shorten otherwise doesn't seem to be loading
+# may have too many elements in html text area?
+knitr::kable(select(df5, -acres), caption = "U.S. historical crop yields by state") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+::: {.w-50 .pl3}
+
+```{r, echo = FALSE}
+pivot_wider(select(df5, -acres), names_from = crop, values_from = yield, names_glue = "{crop}_yield") %>% 
+  knitr::kable(caption = "U.S. historical crop yields by state") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+
+## Is this tidy data? [Part 5]{.f2}
+
+::: flex
+
+::: {.w-45}
+
+```{r, echo = FALSE}
+pivot_longer(df5, yield:acres, values_to = "value", names_to = "metric")  %>% 
+  mutate(value = scales::comma(value)) %>% 
+  knitr::kable(caption = "U.S. historical crop yields by state", align = "llllr") %>% 
+  kableExtra::kable_styling()
+  
+```
+
+:::
+
+::: {.w-55 .pl3 .fragment}
+
+```{r, echo = FALSE}
+pivot_wider(df5, names_from = crop, values_from = c(yield, acres), names_glue = "{crop}_{.value}") %>% 
+  knitr::kable(caption = "U.S. historical crop yields by state") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3 style="background-color:white;"}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+::: {.absolute bottom=0 .f3}
+
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+<div class="bg-white fragment" style="position:absolute;bottom:10px;right:50px;">
+```{r, echo = FALSE}
+df5 %>% 
+  knitr::kable() %>% 
+  kableExtra::kable_styling(htmltable_class = "ste")
+```
+</div>
+
+
+## Wide and long data formats
+
+::: flex
+
+::: {.w-50}
+
+<img src="images/original-dfs-tidy.png" width = "720px">
+
+:::
+
+::: {.w-50 .pl3}
+
+* Transforming data from wide to long or vice versa is referred to as **pivotting**
+* Sometimes the long form is referred to as **molten data**
+* Some people may refer to transforming data from wide to long as **melting** the data and vice-versa as **casting**
+
+
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3}
+
+Picture credit: Garrick Aden-Buie
+
+:::
+
+
+
+## Evolving language
+
+* Earlier efforts to transform data from wide to long was in the `reshape`, first released on CRAN in 2005-08-05
+* It was then superseded by `reshape2` released on CRAN in 2010-09-10
+* Then finally `tidyr` released on CRAN in 2014-07-21 [[<sup>*</sup>v1.0.0 released 2019-09-12](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/)]{.f3}
+
+::: flex
+
+::: {.w-50}
+
+**Wide to long**
+
+* `reshape::melt` <img src="images/lifecycle-retired.png">
+* `reshape2::melt` <img src="images/lifecycle-retired.png">
+* `tidyr::gather` <img src="images/lifecycle-retired.png">
+* **`tidyr::pivot_longer`**<sup>*</sup>
+
+
+
+:::
+
+::: {.w-50 .pl3}
+
+**Long to wide**
+
+* `reshape::cast` <img src="images/lifecycle-retired.png">
+* `reshape2::dcast` <img src="images/lifecycle-retired.png">
+* `tidyr::spread` <img src="images/lifecycle-retired.png">
+* **`tidyr::pivot_wider`**<sup>*</sup>
+
+
+:::
+
+:::
+
+
+
+
+
+
+::: {.absolute bottom=0 .f3}
+
+Hadley Wickham (2020). tidyr: Tidy Messy Data. R
+  package version 1.1.2.
+  
+Hadley Wickham (2007). Reshaping Data with the reshape
+  Package. Journal of Statistical Software, 21(12), 1-20
+  
+:::
+
+
+## Lifecycle
+
+::: flex
+
+::: {.w-40 .f4}
+
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/vignettes/figures/lifecycle.svg">
+
+
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-archived.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-defunct.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-deprecated.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-experimental.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-maturing.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-questioning.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-retired.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-soft-deprecated.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-stable.svg">
+<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-superseded.svg">
+
+:::
+
+::: {.w-60 .pl3}
+
+
+* Functions (and sometimes arguments of functions) in `tidyverse` packages often are labelled with a badge like on the left
+* Find the definitions of badges [here](https://lifecycle.r-lib.org/articles/lifecycle.html)
+* Check out documentations below
+```{r, eval = FALSE}
+help(mutate, package = "dplyr")
+help(mutate_each, package = "dplyr")
+```
+
+:::
+
+:::
+
+
+
+
+
+
+::: {.absolute bottom=0 .f3}
+
+Lionel Henry (2020). lifecycle: Manage the Life Cycle of your Package Functions. R package version 0.2.0.
+
+:::
+
+
+
+## Pivotting data with `tidyr` [Part 1]{.f2}
+
+
+::: flex
+
+::: {.w-65}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Data"
+df_wide <- tibble::tibble(state = c("NSW", "VIC", "ACT"),
+                          `2019` = c(8130159, 6655284, 427892),
+                          `2018` = c(80366651, 6528601, 423169),
+                          `2017` = c(7919815, 6387081, 415874))
+df_long <- pivot_longer(df_wide, cols = `2019`:`2017`, 
+                        names_to = "year",
+                        values_to = "population")
+```
+
+
+```{r, echo = FALSE}
+df_wide <- df1
+knitr::kable(df1, caption = "df_wide") %>% 
+  kableExtra::kable_styling()
+```
+```{r, eval = FALSE}
+#| code-line-numbers: "1-4|5-8"
+pivot_longer(df_wide, 
+             cols = `2019`:`2017`, 
+             names_to = "year",
+             values_to = "population")
+pivot_wider(df_long, 
+            id_cols = state,
+            names_from = year, 
+            values_from = population)
+```
+
+:::
+
+::: {.w-35 .pl3}
+
+```{r, echo = FALSE}
+df_long <- df1 %>% 
+  pivot_longer(-state, names_to = "year", values_to = "population")
+knitr::kable(df_long, caption = "df_long") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3}
+
+Values adapted from Australian Bureau of Statistics. (2020). Table 04. Estimated Resident Population, States and Territories [Time series spreadsheet]. National, state and territory population, Australia Mar 2020. Retrieved Nov 24, 2020. https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/mar-2020/310104.xls
+
+:::
+
+
+
+## Pivotting data with `tidyr` [Part 2]{.f2}
+
+::: flex
+
+::: {.w-40}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Data"
+yield_long <- data.frame(year = c(1900, 1900, 2000, 1900, 1900, 2000, 2000),
+                         state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"),
+                         crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"),
+                         yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37))
+yield_wide <- pivot_wider(yield_long, names_from = crop, values_from = yield, names_glue = "{crop}_yield")
+```
+
+
+```{r, echo = FALSE}
+knitr::kable(select(df5, -acres), caption = "yield_long") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+::: {.w-60 .pl3}
+
+```{r, echo = FALSE}
+pivot_wider(select(df5, -acres), names_from = crop, values_from = yield, names_glue = "{crop}_yield") %>% 
+  knitr::kable(caption = "yield_wide") %>% 
+  kableExtra::kable_styling()
+```
+
+yield_long {{< fa arrow-right >}} yield_wide
+
+
+```{r, eval = FALSE}
+pivot_wider(yield_long, 
+            id_cols = c(year, state),
+            names_from = crop, 
+            values_from = yield, 
+            names_glue = "{crop}_yield") #<<
+```
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+## Pivotting data with `tidyr` [Part 3]{.f2} 
+
+::: flex
+
+::: {.w-40}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Data"
+yield_long <- data.frame(year = c(1900, 1900, 2000, 1900, 1900, 2000, 2000),
+                         state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"),
+                         crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"),
+                         yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37))
+yield_wide <- pivot_wider(yield_long, names_from = crop, values_from = yield, names_glue = "{crop}_yield")
+```
+
+```{r, echo = FALSE}
+knitr::kable(select(df5, -acres), caption = "yield_long") %>% 
+  kableExtra::kable_styling()
+```
+
+:::
+
+::: {.w-60 .pl3}
+
+```{r, echo = FALSE}
+pivot_wider(select(df5, -acres), names_from = crop, values_from = yield, names_glue = "{crop}_yield") %>% 
+  knitr::kable(caption = "yield_wide") %>% 
+  kableExtra::kable_styling()
+```
+yield_wide <i class="fas fa-arrow-right"></i> yield_long
+
+```{r, eval = FALSE}
+#| code-line-numbers: 4
+pivot_longer(yield_wide, 
+        cols = contains("yield"), 
+        names_to = "crop", 
+        names_pattern = "(.+)_yield",  
+        values_to = "yield", 
+        values_drop_na = TRUE)
+```
+
+
+:::
+
+:::
+
+
+
+::: {.absolute bottom=0 .f3}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+## Pivotting data with `tidyr` [Part 4]{.f2}
+
+::: flex
+
+::: {.w-45}
+
+```{r, echo = FALSE}
+pivot_longer(df5, yield:acres, values_to = "value", names_to = "metric")  %>% 
+  mutate(value = scales::comma(value)) %>% 
+  knitr::kable(caption = "crop_long", align = "llllr") %>% 
+  kableExtra::kable_styling()
+  
+```
+
+:::
+
+::: {.w-55 .pl3}
+
+```{r, echo = FALSE}
+pivot_wider(df5, names_from = crop, values_from = c(yield, acres), names_glue = "{crop}_{.value}") %>% 
+  knitr::kable(caption = "crop_wide") %>% 
+  kableExtra::kable_styling()
+```
+
+crop_long <i class="fas fa-arrow-right"></i> crop_wide
+
+```{r, eval = FALSE}
+#| code-line-numbers: 4
+pivot_wider(crop_long, 
+    names_from = c(crop, metric), 
+    values_from = value, 
+    names_glue = "{crop}_{metric}") 
+```
+
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3 style="background-color:white;"}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+
+## Pivotting data with `tidyr` [Part 5]{.f2}
+
+::: flex
+
+::: {.w-45}
+
+```{r, echo = FALSE}
+pivot_longer(df5, yield:acres, values_to = "value", names_to = "metric")  %>% 
+  mutate(value = scales::comma(value)) %>% 
+  knitr::kable(caption = "crop_long", align = "llllr") %>% 
+  kableExtra::kable_styling()
+  
+```
+
+:::
+
+::: {.w-55 .pl3}
+
+```{r, echo = FALSE}
+pivot_wider(df5, names_from = crop, values_from = c(yield, acres), names_glue = "{crop}_{.value}") %>% 
+  knitr::kable(caption = "crop_wide") %>% 
+  kableExtra::kable_styling()
+```
+
+crop_wide <i class="fas fa-arrow-right"></i> crop_long
+
+```{r, eval = FALSE}
+pivot_longer(crop_wide, 
+      cols = -c(year, state),
+      names_to = c("crop", "metric"), 
+      names_pattern = "(.+)_(.+)",
+      values_to = "value")
+```
+
+
+:::
+
+:::
+
+
+::: {.absolute bottom=0 .f3 style="background-color:white;"}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+
+
+## Separate values into columns 
+
+::: flex
+
+::: {.w-30}
+```{r}
+#| code-fold: true
+#| code-summary: "Data"
+pkg_dat <- tribble(~package, ~maintainer,
+        "dplyr", "Hadley Wickham",
+        "magrittr", "Lionel Henry",
+        "tidyr", "Hadley Wickham",
+        "stringr", "Hadley Wickham",
+        "rlang", "Lionel Henry",
+        "tibble", "Kirill Müller",
+        "tidyselect", "Lionel Henry") %>% 
+  arrange(package)
+```
+
+```{r, echo = FALSE}
+pkg_dat <- tribble(~package, ~maintainer,
+        "dplyr", "Hadley Wickham",
+        "magrittr", "Lionel Henry",
+        "tidyr", "Hadley Wickham",
+        "stringr", "Hadley Wickham",
+        "rlang", "Lionel Henry",
+        "tibble", "Kirill Müller",
+        "tidyselect", "Lionel Henry") %>% 
+  arrange(package)
+pkg_dat %>% 
+  knitr::kable(caption = "pkg_dat") %>% 
+  kableExtra::kable_styling()
+```
+
+
+:::
+
+::: {.w-70 .pl3 .fragment}
+
+🎯 separate maintainer name to columns, first name and last name
+
+
+```{r}
+pkg_dat %>% 
+  separate(maintainer, 
+           into = c("first_name", "last_name"),
+           sep = " ")
+```
+
+:::
+
+:::
+
+
+
+## Separate values into rows
+
+::: flex
+
+::: {.w-40}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Data"
+author_dat <- tribble(~package, ~author,
+        "dplyr", "Hadley Wickham, Romain François, Lionel Henry, Kirill Müller",
+        "magrittr", "Lionel Henry, Stefan Milton Bache, Hadley Wickham",
+        "tidyr", "Hadley Wickham",
+        "stringr", "Hadley Wickham",
+        "rlang", "Lionel Henry, Hadley Wickham",
+        "tibble", "Kirill Müller, Hadley Wickham",
+        "tidyselect", "Lionel Henry, Hadley Wickham") %>% 
+  arrange(package)
+```
+
+
+```{r, echo = FALSE}
+author_dat %>% 
+  knitr::kable(caption = "author_dat") %>% 
+  kableExtra::kable_styling()
+```
+
+
+:::
+
+::: {.w-60 .pl3 .fragment}
+
+```{r}
+author_dat %>% 
+  separate_rows(author, sep = ", ")
+```
+
+
+:::
+
+:::
 
