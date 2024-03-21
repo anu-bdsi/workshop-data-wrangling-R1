@@ -125,3 +125,7 @@
 .grey  code {
   color: grey!important;
 }
+
+thead, tbody {
+  font-size: 0.8em;
+}

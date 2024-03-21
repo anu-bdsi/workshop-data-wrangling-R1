@@ -56,7 +56,7 @@ learning_objectives()
 
 
 
-## Current learning objective
+## {{< fa crosshairs >}} Current learning objective
 
 
 ```{r}
