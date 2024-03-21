@@ -121,3 +121,7 @@
   height: 18%!important;
   margin-right: 2%!important;
 }
+
+.grey  code {
+  color: grey!important;
+}
