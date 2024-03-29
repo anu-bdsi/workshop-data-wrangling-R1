@@ -283,3 +283,11 @@ arrange(mtcars, wt)
 
 
 ## Summary
+
+
+# Exercise time {background-color="#F5EDDE"}
+
+
+[<i class='fas fa-laptop-code'></i>](https://anu-bdsi.github.io/workshop-data-wrangling-R1/materials.html#tabset-1-1-tab){.f-headline}
+
+`r exercise_countdown(2)`
