@@ -9,6 +9,10 @@ format:
       - assets/webex.css
       - assets/custom.css
     include-after-body: assets/webex.js
+filters:
+  - webr2
+webr: 
+  show-startup-message: false    
 ---
 
 ```{r setup, include = FALSE}
@@ -63,7 +67,7 @@ content |>
   mutate(Content = switch(type,
                               "exercise" = ex_tabset(content_id),
                               "slide" = slide_title(content_id),
-                              "break" = "_Break_")) |>
+                              type)) |>
   select(Time, Content) |> 
   knitr::kable()
 ```
@@ -83,7 +87,7 @@ content |>
 
 {{< include "exercises/_exercise1.qmd" >}}
 
-`r checklist(LOs[1:2])`
+`r checklist(LOs[1])`
 
 ## Exercise 2
 
@@ -91,7 +95,7 @@ content |>
 {{< include "exercises/_exercise2.qmd" >}}
 
 
-`r checklist(LOs[3])`
+`r checklist(LOs[2:3])`
 
 ## Exercise 3
 
