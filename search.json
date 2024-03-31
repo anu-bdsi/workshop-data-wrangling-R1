@@ -25,7 +25,7 @@
     "href": "materials.html#schedule",
     "title": "Materials",
     "section": "🕙 Schedule",
-    "text": "🕙 Schedule\n\n\n\n\n\nTime\nContent\n\n\n\n\n10:00–10:30\nTidy data\n\n\n10:30–10:45\nExercise 1\n\n\n10:45–11:15\nWelcome to Tidyverse\n\n\n11:15–11:30\nExercise 2\n\n\n11:30–11:40\nBreak\n\n\n11:40–12:00\nPivotting data\n\n\n12:00–12:10\nExercise 3\n\n\n12:10–12:40\nRelational data\n\n\n12:40–12:55\nExercise 4\n\n\n12:55–13:00\nWrap up"
+    "text": "🕙 Schedule\n\n\n\n\n\nTime\nContent\n\n\n\n\n10:00–10:15\nTidy data\n\n\n10:15–10:35\nExercise 1\n\n\n10:35–10:45\nDiscuss exercise 1\n\n\n10:45–11:15\nWelcome to Tidyverse\n\n\n11:15–11:30\nExercise 2\n\n\n11:30–11:40\nBreak\n\n\n11:40–12:00\nPivotting data\n\n\n12:00–12:10\nExercise 3\n\n\n12:10–12:40\nRelational data\n\n\n12:40–12:55\nExercise 4\n\n\n12:55–13:00\nWrap up"
   },
   {
     "objectID": "materials.html#resources",
@@ -39,7 +39,7 @@
     "href": "materials.html#exercises",
     "title": "Materials",
     "section": "🏋️‍♀️ Exercises",
-    "text": "🏋️‍♀️ Exercises\n\nExercise 1Exercise 2Exercise 3Exercise 4Exercise 4\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Recognize the characteristics of tidy data\n\n\n Differentiate between the Base and Tidyverse paradigms\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Acquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using dplyr\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Pivot data into longer or wider format using tidyr\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Join datasets using dplyr"
+    "text": "🏋️‍♀️ Exercises\n\nExercise 1Exercise 2Exercise 3Exercise 4Exercise 4\n\n\nFrom the print handouts (given out in the workshop), discuss with your group about whether the data are organised as tidy data for each spreadsheet. If it is not a tidy data, then how would you organise it so that it is tidy?\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Recognize the characteristics of tidy data\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Differentiate between the Base and Tidyverse paradigms\n\n\n Acquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using dplyr\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Pivot data into longer or wider format using tidyr\n\n\n\n\n\n\n\n\n\n\n\n\nReflect on learning objectives\n\n\n\nYou should be able to:\n\n\n Join datasets using dplyr"
   },
   {
     "objectID": "slides/slide4.html#current-learning-objective",
@@ -81,14 +81,7 @@
     "href": "slides/slide2.html#data.frame-base-r",
     "title": "Welcome to Tidyverse",
     "section": "data.frame (Base R)",
-    "text": "data.frame (Base R)\n\nIn R, data.frame is a special class of list.\nEvery column in the data.frame is a vector of the same length.\nEach entry in a vector have the same type, e.g. logical, integer, double (or numeric), character or factor.\nIt has an attribute row.names which could be a sequence of integers indexing the row number or some unique identifier.\n\n\nmtcars\n\n                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb\nMazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2\nValiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1\nDuster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4\nMerc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2\nMerc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2\nMerc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4\nMerc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4\nMerc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3\nMerc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3\nMerc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3\nCadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4\nLincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4\nChrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4\nFiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1\nHonda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2\nToyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1\nToyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1\nDodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2\nAMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2\nCamaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4\nPontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2\nFiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1\nPorsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2\nLotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2\nFord Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4\nFerrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6\nMaserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8\nVolvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2"
-  },
-  {
-    "objectID": "slides/slide2.html#list-base-r",
-    "href": "slides/slide2.html#list-base-r",
-    "title": "Welcome to Tidyverse",
-    "section": "list (Base R)",
-    "text": "list (Base R)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "data.frame (Base R)\n\n\nIn R, data.frame is a special class of list.\nEvery column in the data.frame is a vector of the same length.\nEach entry in a vector have the same type, e.g. logical, integer, double (or numeric), character or factor.\nIt has an attribute row.names which could be a sequence of integers indexing the row number or some unique identifier.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/slide2.html#subsetting-by-column-base-r",
@@ -102,7 +95,7 @@
     "href": "slides/slide2.html#subsetting-by-column-base-r-1",
     "title": "Welcome to Tidyverse",
     "section": "Subsetting by column (Base R) ",
-    "text": "Subsetting by column (Base R) \n\ndata.frame inherits methods for list, but list does not inherit methods for data.frame.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nIf you subset a single column using [, ], then by default the output is a vector and not a data.frame.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Subsetting by column (Base R) \n\nIf you subset a single column using [, ], then by default the output is a vector and not a data.frame.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/slide2.html#subsetting-by-row-base-r",
@@ -151,21 +144,21 @@
     "href": "slides/slide2.html#a-grammar-of-data-manipulation",
     "title": "Welcome to Tidyverse",
     "section": "A grammar of data manipulation",
-    "text": "A grammar of data manipulation\n\ndplyr is a core package in tidyverse\nThe earlier concept of dplyr (first on CRAN in 2014-01-29) was implemented in plyr (first on CRAN in 2008-10-08)\nThe functions in dplyr has been evolving frequently but dplyr v1.0.0 was released on CRAN in 2020-05-29\nThis new version contained new “verbs”\nThe major release suggests that functions in dplyr are maturing and thus the user interface is unlikely to change\n\n\n\nHadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.2.\nHadley Wickham (2011). The Split-Apply-Combine Strategy for Data Analysis. Journal of Statistical Software, 40(1), 1-29."
+    "text": "A grammar of data manipulation\n\n\n\ndplyr is a core package in tidyverse\nThe earlier concept of dplyr (first on CRAN in 2014-01-29) was implemented in plyr (first on CRAN in 2008-10-08).\nThe functions in dplyr has been evolving frequently but dplyr v1.0.0 was released on CRAN in 2020-05-29 suggesting that functions in dplyr are maturing and thus the user interface is unlikely to change.\n\n\n\n\n\n\n\n\n\n\nHadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.2.\nHadley Wickham (2011). The Split-Apply-Combine Strategy for Data Analysis. Journal of Statistical Software, 40(1), 1-29."
   },
   {
     "objectID": "slides/slide2.html#dplyr-verbs",
     "href": "slides/slide2.html#dplyr-verbs",
     "title": "Welcome to Tidyverse",
     "section": "dplyr “verbs”",
-    "text": "dplyr “verbs”\n\nThe main functions of dplyr include:\n\narrange\nselect\nmutate\nrename\ngroup_by\nsummarise\n\nNotice that these functions are verbs"
+    "text": "dplyr “verbs”\n\nThe main functions of dplyr include:\n\narrange\nselect\nmutate\nrename\ngroup_by\nsummarise\n\nNotice that these functions are verbs."
   },
   {
     "objectID": "slides/slide2.html#dplyr-structure",
     "href": "slides/slide2.html#dplyr-structure",
     "title": "Welcome to Tidyverse",
     "section": "dplyr structure",
-    "text": "dplyr structure\n\nFunctions in dplyr generally have the form:\n\n\nverb(data, args)\n\n\nI.e., the first argument data is a data.frame object\nWhat do you think the following will do?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "dplyr structure\n\nFunctions in dplyr generally have the form:\n\n\nverb(data, args)\n\n\nThe first argument data is a data.frame object.\n\n\n\nWhat do you think the following will do?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/slide2.html#base-r-and-tidyverse",
