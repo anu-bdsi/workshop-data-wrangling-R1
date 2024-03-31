@@ -214,7 +214,7 @@ Hadley Wickham (2007). Reshaping Data with the reshape
 ```{webr-r}
 help(mutate_each, package = "dplyr") # deprecated
 help(sample_frac, package = "dplyr") # superseded
-help(mutate, package = "dplyr") # look the .by argument
+help(mutate, package = "dplyr") # look at the .by argument
 ```
 
 
