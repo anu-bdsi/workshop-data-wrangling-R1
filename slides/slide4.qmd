@@ -1,5 +1,5 @@
 ---
-title: "Relational data"
+title: "Joining two datasets"
 subtitle: "[[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R [Part 1]{.part-label}]{.tag-workshop}"
 format:
   anu-light-revealjs:
