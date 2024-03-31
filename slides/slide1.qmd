@@ -16,6 +16,10 @@ author: Emi Tanaka
 institute: Biological Data Science Institute
 date: 2024/04/08
 date-format: "D[th] MMMM YYYY"
+filters:
+  - webr
+webr: 
+  show-startup-message: false   
 execute: 
   echo: true
 ---
