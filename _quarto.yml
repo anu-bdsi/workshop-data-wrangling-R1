@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+   - "*.pdf"
 
 website:
   title: "[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R [Part 1]{.part-label}"

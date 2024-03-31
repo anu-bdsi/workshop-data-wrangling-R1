@@ -263,32 +263,156 @@ rename(mtcars, miles_per_gallon = mpg)
 arrange(mtcars, wt)
 ```
 
+## Pipe operator 
 
-## Base R and Tidyverse
+::: incremental 
 
-
-::: incremental
-
-* Tidyverse is not a substitute for Base R 
-* Knowing Base R is essential to use Tidyverse effectively
-
-
-:::
-
-
-::: notes
-
-
-* Data wrangling in Tidyverse just gives you a different flavour of how you can do things in Base R. 
-* All data wrangling can be achieved using Base R, so why load extra package(s) to deal with the data wrangling? 🤔
-* Tidyverse packages share a common design philosophy, grammar and data structure
-* This trains your mental model to do data science tasks in a certain manner which may make it easier, faster, and/or fun for you to do these tasks
-* It's an opinionated approach so you should make a decision for yourself of what works for you _and_ others that you share your work with
+- Almost all the `tidyverse` packages use the pipe operator `%>%` from the `magrittr` package.
+- R version 4.1.0 introduced a native pipe operator `|>` which is similar to `%>%` but with some differences.
+- `x |> f(y)` is the same as `f(x, y)`.
+- `x |> f(y) |> g(z)` is the same as `g(f(x, y), z)`.
+- When you see the pipe operator, read it as "and then".
 
 :::
+
+. . . 
+
+```{webr-r}
+mtcars |>                           # take mtcars data, and then
+  rename(miles_per_gallon = mpg) |> # rename mpg as miles_per_gallon, and then
+  arrange(wt)                       # arrange row by wt
+```
+
+## Tidyselect
+
+- Tidyverse packages generally use syntax from the `tidyselect` package for column selection.
+
+```{webr-r}
+mtcars |> select(1:3) # by index
+mtcars |> select(mpg, cyl, disp) # by name
+mtcars |> select(mpg:disp) # by contiguous columns
+mtcars |> select(-mpg) # exclude mpg
+```
+
+## Selection language 
+
+```{webr-r}
+help(language, package = "tidyselect")
+```
+
+
+## `tibble` [(Tidyverse)]{.f2}
+
+- `tibble` is a modern reimagining of the `data.frame` object.
+
+```{webr-r}
+as_tibble(mtcars)
+```
+
+
+## Subsetting by column [(Tidyverse)]{.f2}
+
+```{webr-r}
+mtcars |> select(mpg, cyl)
+mtcars |> select("mpg", "cyl")
+mtcars |> select(mpg)
+mtcars |> pull(mpg)
+```
+
+
+## Subsetting by row [(Tidyverse)]{.f2}
+
+```{webr-r}
+mtcars |> slice(1:3)
+mtcars |> filter(mpg > 20)
+```
+
+
+## Adding or modifying a column [(Tidyverse)]{.f2}
+
+```{r}
+mtcars |> mutate(gpm = 1/mpg)
+mtcars |> mutate(engine = case_when(vs==0 ~ "V-shaped",
+                                    vs==1 ~ "Straight"),
+                 transmission = ifelse(am==0, "Automatic", "Manual"))
+```
+
+
+## Adding a row [(Tidyverse)]{.f2}
+
+```{webr-r}
+mtcars |> 
+  bind_rows(data.frame(dist = 10, speed = 3))
+```
+
+## Sorting columns [(Tidyverse)]{.f2}
+
+```{webr-r}
+mtcars |> select(sort(colnames(mtcars)))
+mtcars |> select(wt, gears, everything())
+mtcars |> relocate(am, carb, .before = cyl)
+```
+
+
+
+## Sorting rows [(Tidyverse)]{.f2}
+
+```{webr-r}
+mtcars |> arrange(desc(mpg)) # sort by mpg in descending order
+```
+
+
+## Calculating statistical summaries by group [(Tidyverse)]{.f2}
+
+```{webr-r}
+mtcars |> 
+  group_by(gear) |> 
+  summarise(avg_wt = mean(wt))
+
+mtcars |> summarise(avg_wt = mean(wt), .by = gear)
+mtcars |> summarise(avg_wt = mean(wt), .by = c(gear, vs))
+```
+
+## Applying a function to multiple columns
+
+```{webr-r}
+mtcars |> summarise(across(everything(), mean), .by = gear)
+mtcars |> summarise(across(where(~n_distinct(.x) > 10), mean), .by = gear)
+mtcars |> rowwise() |> summarise(score = sum(c_across(disp:wt)))
+```
 
 
 ## Summary
+
+* Data wrangling in Tidyverse just gives you a different flavour of how you can do things in Base R. 
+* Tidyverse packages share a common design philosophy, grammar and data structure.
+* This trains your mental model to do data science tasks in a certain manner which may make it easier, faster, and/or fun for you to do these tasks.
+
+
+## `dplyr` cheatsheet
+
+::: flex
+
+::: {.w-50}
+
+![](assets/data-transformation_Page_1.png){.ba}
+
+:::
+
+::: {.w-50 .pl3}
+
+![](assets/data-transformation_Page_2.png){.ba}
+
+
+:::
+
+:::
+
+::: aside
+
+[<i class='fas fa-file-pdf'></i> dplyr cheatsheet](assets/data-transformation.pdf)
+
+:::
 
 
 # Exercise time {background-color="#F5EDDE"}
