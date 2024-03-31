@@ -30,10 +30,10 @@ execute:
 
 ## Teaching team 
 
+
 `r photo_path <- ""`
 
 {{< include _team.qmd >}}
-
 
 
 # Workshop materials
