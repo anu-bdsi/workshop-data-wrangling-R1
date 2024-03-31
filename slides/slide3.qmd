@@ -8,19 +8,88 @@ format:
     auto-stretch: false
     html-math-method: katex
     self-contained: true
-    css: assets/custom.css
+    css: 
+     - assets/custom.css
+     - assets/table.css
     footer: anu-bdsi.github.io/workshop-data-wrangling-R1/
 author: Emi Tanaka
 institute: Biological Data Science Institute
 date: 2024/04/08
 date-format: "D[th] MMMM YYYY"
+filters:
+  - webr
 execute: 
   echo: true
+webr: 
+  show-startup-message: false  
+  packages: 
+    - tidyverse
 ---
 
 
 
 ## {{< fa crosshairs >}} Current learning objective
+
+```{webr-r}
+#| context: setup
+df_wide <- tibble::tibble(state = c("NSW", "VIC", "ACT"),
+                          `2019` = c(8130159, 6655284, 427892),
+                          `2018` = c(80366651, 6528601, 423169),
+                          `2017` = c(7919815, 6387081, 415874))
+
+df_long <- data.frame(state = c("NSW", "NSW", "NSW", "VIC", "VIC", "VIC", "ACT", "ACT", "ACT"),
+                      year = c("2019", "2018", "2017", "2019", 
+                               "2018", "2017", "2019", "2018", "2017"), 
+                      population = c(8130159, 80366651, 7919815, 6655284, 6528601, 6387081, 427892, 423169, 415874))
+
+yield_long <- data.frame(year = c(1900, 1900, 2000, 1900, 1900, 2000, 2000),
+                         state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"),
+                         crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"),
+                         yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37))
+
+yield_wide <- data.frame(year = c(1900, 1900, 2000, 2000), 
+                         state = c("Iowa", "Kansas", "Kansas", "Iowa"),
+                         barley_yield = c(28.5, 18, 35, NA), 
+                         wheat_yield = c(14.4, 18.2, 37, 47))
+
+crop_long <- data.frame(year = c(1900L, 1900L, 1900L, 1900L, 2000L, 2000L, 1900L, 1900L, 1900L, 1900L, 2000L, 2000L, 2000L, 2000L),
+                        state = c("Iowa", "Iowa", "Kansas", "Kansas", "Kansas", "Kansas", "Iowa", "Iowa", "Kansas", "Kansas", "Iowa", "Iowa", "Kansas", "Kansas"),
+                        crop = c("barley", "barley", "barley", "barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat", "wheat", "wheat", "wheat", "wheat"),
+                        metric = c("yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres"),
+                        value = c(28.5, 620000, 18, 127000, 35, 7000, 14.4, 1450000, 18.2, 4290000, 47, 18000, 37, 9400000))
+
+crop_wide <- data.frame(year = c(1900L, 1900L, 2000L, 2000L), 
+                        state = c("Iowa", "Kansas", "Kansas", "Iowa"), 
+                        barley_yield = c(28.5, 18, 35, NA), 
+                        wheat_yield = c(14.4, 18.2, 37, 47), 
+                        barley_acres = c(620000, 127000, 7000, NA), 
+                        wheat_acres = c(1450000, 4290000, 9400000, 18000))
+
+crop_tidy <- data.frame(year = c(1900L, 1900L, 2000L, 1900L, 1900L, 2000L, 2000L),
+                        state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"), 
+                        crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"), 
+                        yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37), 
+                        acres = c(620000, 127000, 7000, 1450000, 4290000, 18000, 
+9400000))
+
+author_dat <- data.frame(package = c("dplyr", "magrittr", "rlang", "stringr", "tibble", "tidyr", "tidyselect"), 
+                         author = c("Hadley Wickham, Romain François, Lionel Henry, Kirill Müller", "Lionel Henry, Stefan Milton Bache, Hadley Wickham", "Lionel Henry, Hadley Wickham", "Hadley Wickham", "Kirill Müller, Hadley Wickham", "Hadley Wickham", "Lionel Henry, Hadley Wickham"))
+
+```
+
+```{r}
+#| echo: false
+crop_tidy <- data.frame(year = c(1900L, 1900L, 2000L, 1900L, 1900L, 2000L, 2000L),
+                        state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"), 
+                        crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"), 
+                        yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37), 
+                        acres = c(620000, 127000, 7000, 1450000, 4290000, 18000, 
+9400000))
+
+pkg_dat <- data.frame(package = c("dplyr", "magrittr", "rlang", "stringr", "tibble", "tidyr", "tidyselect"), 
+                      maintainer = c("Hadley Wickham", "Lionel Henry", "Lionel Henry", "Hadley Wickham", "Kirill Müller", "Hadley Wickham", "Lionel Henry"))
+
+```
 
 ```{r}
 #| include: false
@@ -34,26 +103,6 @@ source("setup.R")
 #| echo: false
 learning_objectives(4)
 ```
-
-
-
-
-```{r, echo = FALSE}
-library(tidyverse)
-df1 <- tibble(state = c("NSW", "VIC", "ACT"),
-       `2019` = c(8130159, 6655284, 427892),
-       `2018` = c(80366651, 6528601, 423169),
-       `2017` = c(7919815, 6387081, 415874))
-
-data(nass.barley, package = "agridat")
-data(nass.wheat, package = "agridat")
-df5 <- rbind(mutate(nass.barley, crop = "barley"), 
-             mutate(nass.wheat, crop = "wheat")) %>% 
-  select(year, state, crop, yield, acres) %>% 
-  filter(state %in% c("Iowa", "Kansas")) %>% 
-  filter(year %in% c(1900, 2000))
-```
-
 
 
 ## Tidy data 
@@ -72,7 +121,8 @@ df5 <- rbind(mutate(nass.barley, crop = "barley"),
 <img src="images/tidy-data.svg" width="90%">
 </center>
 
-- `dplyr`, `tidyr` and `ggplot2` are downstream packages to work with _tidy data_
+- Tidyverse functions are designed to work with tidy data.
+
 
 ::: {.absolute bottom=0 .f3}
 
@@ -85,11 +135,11 @@ Wickham (2014) Tidy Data. *Journal of Statistical Software*
 
 ## Evolving language
 
-* Earlier efforts to transform data from wide to long was in the `reshape`, first released on CRAN in 2005-08-05
-* It was then superseded by `reshape2` released on CRAN in 2010-09-10
-* Then finally `tidyr` released on CRAN in 2014-07-21 [[<sup>*</sup>v1.0.0 released 2019-09-12](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/)]{.f3}
+* Earlier efforts to transform data from wide to long was in the `reshape`, first released on CRAN in 2005-08-05.
+* It was then superseded by `reshape2` released on CRAN in 2010-09-10.
+* Then finally `tidyr` released on CRAN in 2014-07-21 [[<sup>*</sup>v1.0.0 released 2019-09-12](https://www.tidyverse.org/blog/2019/09/tidyr-1-0-0/)]{.f3}.
 
-::: flex
+::: {.flex .fragment}
 
 ::: {.w-50}
 
@@ -143,14 +193,8 @@ Hadley Wickham (2007). Reshaping Data with the reshape
 <img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/vignettes/figures/lifecycle.svg">
 
 
-<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-archived.svg">
-<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-defunct.svg">
 <img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-deprecated.svg">
 <img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-experimental.svg">
-<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-maturing.svg">
-<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-questioning.svg">
-<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-retired.svg">
-<img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-soft-deprecated.svg">
 <img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-stable.svg">
 <img src="https://raw.githubusercontent.com/r-lib/lifecycle/master/man/figures/lifecycle-superseded.svg">
 
@@ -160,18 +204,18 @@ Hadley Wickham (2007). Reshaping Data with the reshape
 
 
 * Functions (and sometimes arguments of functions) in `tidyverse` packages often are labelled with a badge like on the left
-* Find the definitions of badges [here](https://lifecycle.r-lib.org/articles/lifecycle.html)
-* Check out documentations below
-```{r, eval = FALSE}
-help(mutate, package = "dplyr")
-help(mutate_each, package = "dplyr")
+
+
+:::
+
+:::
+
+
+```{webr-r}
+help(mutate_each, package = "dplyr") # deprecated
+help(sample_frac, package = "dplyr") # superseded
+help(mutate, package = "dplyr") # look the .by argument
 ```
-
-:::
-
-:::
-
-
 
 
 
@@ -189,7 +233,9 @@ Lionel Henry (2020). lifecycle: Manage the Life Cycle of your Package Functions.
 
 ::: flex
 
-::: {.w-65}
+::: {.w-30}
+
+::: f3
 
 ```{r}
 #| code-fold: true
@@ -198,38 +244,46 @@ df_wide <- tibble::tibble(state = c("NSW", "VIC", "ACT"),
                           `2019` = c(8130159, 6655284, 427892),
                           `2018` = c(80366651, 6528601, 423169),
                           `2017` = c(7919815, 6387081, 415874))
-df_long <- pivot_longer(df_wide, cols = `2019`:`2017`, 
-                        names_to = "year",
-                        values_to = "population")
-```
 
-
-```{r, echo = FALSE}
-df_wide <- df1
-knitr::kable(df1, caption = "df_wide") %>% 
-  kableExtra::kable_styling()
-```
-```{r, eval = FALSE}
-#| code-line-numbers: "1-4|5-8"
-pivot_longer(df_wide, 
-             cols = `2019`:`2017`, 
-             names_to = "year",
-             values_to = "population")
-pivot_wider(df_long, 
-            id_cols = state,
-            names_from = year, 
-            values_from = population)
+df_long <- data.frame(state = c("NSW", "NSW", "NSW", "VIC", "VIC", "VIC", "ACT", "ACT", "ACT"),
+                      year = c("2019", "2018", "2017", "2019", 
+                               "2018", "2017", "2019", "2018", "2017"), 
+                      population = c(8130159, 80366651, 7919815, 6655284, 6528601, 6387081, 427892, 423169, 415874))
 ```
 
 :::
 
-::: {.w-35 .pl3}
+```{r, echo = FALSE}
+knitr::kable(df_wide, caption = "df_wide") %>% 
+  kableExtra::kable_styling()
+```
 
 ```{r, echo = FALSE}
-df_long <- df1 %>% 
-  pivot_longer(-state, names_to = "year", values_to = "population")
 knitr::kable(df_long, caption = "df_long") %>% 
   kableExtra::kable_styling()
+```
+
+:::
+
+
+
+::: {.w-70 .pl3}
+
+
+
+
+
+```{webr-r}
+df_wide
+df_long
+
+df_wide |> pivot_longer(cols = `2019`:`2017`, 
+                        names_to = "year",
+                        values_to = "population")
+
+df_long |> pivot_wider(id_cols = state,
+                       names_from = year, 
+                       values_from = population)
 ```
 
 :::
@@ -251,6 +305,8 @@ Values adapted from Australian Bureau of Statistics. (2020). Table 04. Estimated
 
 ::: {.w-40}
 
+::: f3
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Data"
@@ -258,12 +314,26 @@ yield_long <- data.frame(year = c(1900, 1900, 2000, 1900, 1900, 2000, 2000),
                          state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"),
                          crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"),
                          yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37))
-yield_wide <- pivot_wider(yield_long, names_from = crop, values_from = yield, names_glue = "{crop}_yield")
+```
+
+```{r yield-wide}
+#| echo: false
+yield_wide <- data.frame(year = c(1900, 1900, 2000, 2000), 
+                         state = c("Iowa", "Kansas", "Kansas", "Iowa"),
+                         barley_yield = c(28.5, 18, 35, NA), 
+                         wheat_yield = c(14.4, 18.2, 37, 47))
 ```
 
 
+:::
+
 ```{r, echo = FALSE}
-knitr::kable(select(df5, -acres), caption = "yield_long") %>% 
+knitr::kable(yield_long, caption = "yield_long") %>% 
+  kableExtra::kable_styling()
+```
+
+```{r, echo = FALSE}
+knitr::kable(yield_wide, caption = "yield_wide") %>% 
   kableExtra::kable_styling()
 ```
 
@@ -271,21 +341,19 @@ knitr::kable(select(df5, -acres), caption = "yield_long") %>%
 
 ::: {.w-60 .pl3}
 
-```{r, echo = FALSE}
-pivot_wider(select(df5, -acres), names_from = crop, values_from = yield, names_glue = "{crop}_yield") %>% 
-  knitr::kable(caption = "yield_wide") %>% 
-  kableExtra::kable_styling()
-```
+
 
 yield_long {{< fa arrow-right >}} yield_wide
 
 
-```{r, eval = FALSE}
-pivot_wider(yield_long, 
-            id_cols = c(year, state),
-            names_from = crop, 
-            values_from = yield, 
-            names_glue = "{crop}_yield") #<<
+```{webr-r}
+yield_long
+
+yield_long |> 
+  pivot_wider(id_cols = c(year, state),
+              names_from = crop, 
+              values_from = yield, 
+              names_glue = "{crop}_yield")
 ```
 
 :::
@@ -308,40 +376,43 @@ Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
 
 ::: {.w-40}
 
-```{r}
+::: f3
+
+```{r yield-wide}
 #| code-fold: true
 #| code-summary: "Data"
-yield_long <- data.frame(year = c(1900, 1900, 2000, 1900, 1900, 2000, 2000),
-                         state = c("Iowa", "Kansas", "Kansas", "Iowa", "Kansas", "Iowa", "Kansas"),
-                         crop = c("barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat"),
-                         yield = c(28.5, 18, 35, 14.4, 18.2, 47, 37))
-yield_wide <- pivot_wider(yield_long, names_from = crop, values_from = yield, names_glue = "{crop}_yield")
+```
+
+:::
+
+```{r, echo = FALSE}
+knitr::kable(yield_wide, caption = "yield_wide") %>% 
+  kableExtra::kable_styling()
 ```
 
 ```{r, echo = FALSE}
-knitr::kable(select(df5, -acres), caption = "yield_long") %>% 
+knitr::kable(yield_long, caption = "yield_long") %>% 
   kableExtra::kable_styling()
 ```
+
+
 
 :::
 
 ::: {.w-60 .pl3}
 
-```{r, echo = FALSE}
-pivot_wider(select(df5, -acres), names_from = crop, values_from = yield, names_glue = "{crop}_yield") %>% 
-  knitr::kable(caption = "yield_wide") %>% 
-  kableExtra::kable_styling()
-```
+
 yield_wide <i class="fas fa-arrow-right"></i> yield_long
 
-```{r, eval = FALSE}
-#| code-line-numbers: 4
+```{webr-r}
+yield_wide
+
 pivot_longer(yield_wide, 
-        cols = contains("yield"), 
-        names_to = "crop", 
-        names_pattern = "(.+)_yield",  
-        values_to = "yield", 
-        values_drop_na = TRUE)
+             cols = contains("yield"), 
+             names_to = "crop", 
+             names_pattern = "(.+)_yield",  
+             values_to = "yield", 
+             values_drop_na = TRUE)
 ```
 
 
@@ -366,10 +437,37 @@ Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
 
 ::: {.w-45}
 
+::: f3
+
+```{r crop-long}
+#| code-fold: true
+#| code-summary: "Data"
+crop_long <- data.frame(year = c(1900L, 1900L, 1900L, 1900L, 2000L, 2000L, 1900L, 1900L, 1900L, 1900L, 2000L, 2000L, 2000L, 2000L),
+                        state = c("Iowa", "Iowa", "Kansas", "Kansas", "Kansas", "Kansas", "Iowa", "Iowa", "Kansas", "Kansas", "Iowa", "Iowa", "Kansas", "Kansas"),
+                        crop = c("barley", "barley", "barley", "barley", "barley", "barley", "wheat", "wheat", "wheat", "wheat", "wheat", "wheat", "wheat", "wheat"),
+                        metric = c("yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres", "yield", "acres"),
+                        value = c(28.5, 620000, 18, 127000, 35, 7000, 14.4, 1450000, 18.2, 4290000, 47, 18000, 37, 9400000))
+
+
+```
+
+```{r crop-wide}
+#| echo: false
+crop_wide <- data.frame(year = c(1900L, 1900L, 2000L, 2000L), 
+                        state = c("Iowa", "Kansas", "Kansas", "Iowa"), 
+                        barley_yield = c(28.5, 18, 35, NA), 
+                        wheat_yield = c(14.4, 18.2, 37, 47), 
+                        barley_acres = c(620000, 127000, 7000, NA), 
+                        wheat_acres = c(1450000, 4290000, 9400000, 18000))
+```
+
+
+:::
+
 ```{r, echo = FALSE}
-pivot_longer(df5, yield:acres, values_to = "value", names_to = "metric")  %>% 
+crop_long  %>% 
   mutate(value = scales::comma(value)) %>% 
-  knitr::kable(caption = "crop_long", align = "llllr") %>% 
+  knitr::kable(caption = "crop_long", align = "lllr") %>% 
   kableExtra::kable_styling()
   
 ```
@@ -379,19 +477,20 @@ pivot_longer(df5, yield:acres, values_to = "value", names_to = "metric")  %>%
 ::: {.w-55 .pl3}
 
 ```{r, echo = FALSE}
-pivot_wider(df5, names_from = crop, values_from = c(yield, acres), names_glue = "{crop}_{.value}") %>% 
+crop_wide %>% 
   knitr::kable(caption = "crop_wide") %>% 
   kableExtra::kable_styling()
 ```
 
 crop_long <i class="fas fa-arrow-right"></i> crop_wide
 
-```{r, eval = FALSE}
-#| code-line-numbers: 4
+```{webr-r}
+crop_long
+
 pivot_wider(crop_long, 
-    names_from = c(crop, metric), 
-    values_from = value, 
-    names_glue = "{crop}_{metric}") 
+            names_from = c(crop, metric), 
+            values_from = value, 
+            names_glue = "{crop}_{metric}") 
 ```
 
 
@@ -414,38 +513,113 @@ Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
 
 ::: flex
 
-::: {.w-45}
+::: {.w-55 .pl3}
 
-```{r, echo = FALSE}
-pivot_longer(df5, yield:acres, values_to = "value", names_to = "metric")  %>% 
-  mutate(value = scales::comma(value)) %>% 
-  knitr::kable(caption = "crop_long", align = "llllr") %>% 
-  kableExtra::kable_styling()
-  
+::: f3
+
+```{r crop-wide}
+#| code-fold: true
+#| code-summary: "Data"
 ```
 
 :::
 
-::: {.w-55 .pl3}
-
 ```{r, echo = FALSE}
-pivot_wider(df5, names_from = crop, values_from = c(yield, acres), names_glue = "{crop}_{.value}") %>% 
+crop_wide %>% 
   knitr::kable(caption = "crop_wide") %>% 
   kableExtra::kable_styling()
 ```
 
 crop_wide <i class="fas fa-arrow-right"></i> crop_long
 
-```{r, eval = FALSE}
+```{webr-r}
+crop_wide
+
 pivot_longer(crop_wide, 
-      cols = -c(year, state),
-      names_to = c("crop", "metric"), 
-      names_pattern = "(.+)_(.+)",
-      values_to = "value")
+             cols = -c(year, state),
+             names_to = c("crop", "metric"), 
+             names_pattern = "(.+)_(.+)",
+             values_to = "value")
 ```
 
 
 :::
+
+::: {.w-45}
+
+
+
+```{r, echo = FALSE}
+crop_long %>% 
+  mutate(value = scales::comma(value)) %>% 
+  knitr::kable(caption = "crop_long", align = "lllr") %>% 
+  kableExtra::kable_styling()
+  
+```
+
+:::
+
+
+
+:::
+
+
+::: {.absolute bottom=0 .f3 style="background-color:white;"}
+
+United States Department of Agriculture, National Agricultural Statistics Service. http://quickstats.nass.usda.gov/
+
+Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
+
+:::
+
+## Pivotting data with `tidyr` [Part 6]{.f2}
+
+::: flex
+
+::: {.w-45 .pl3}
+
+::: f3
+
+```{r crop-long}
+#| code-fold: true
+#| code-summary: "Data"
+```
+
+:::
+
+```{r, echo = FALSE}
+crop_long %>% 
+  knitr::kable(caption = "crop_long") %>% 
+  kableExtra::kable_styling()
+```
+
+
+
+
+:::
+
+::: {.w-55}
+
+
+```{r, echo = FALSE}
+crop_tidy %>% 
+  knitr::kable(caption = "crop_tidy") %>% 
+  kableExtra::kable_styling()
+  
+```
+
+crop_long <i class="fas fa-arrow-right"></i> crop_tidy
+
+```{webr-r}
+crop_long |> 
+  pivot_wider(id_cols = c(year, state, crop), 
+              values_from = value, 
+              names_from = metric)
+```
+
+:::
+
+
 
 :::
 
@@ -465,30 +639,19 @@ Kevin Wright (2020). agridat: Agricultural Datasets. R package version 1.17
 ::: flex
 
 ::: {.w-30}
+
+::: f3
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Data"
-pkg_dat <- tribble(~package, ~maintainer,
-        "dplyr", "Hadley Wickham",
-        "magrittr", "Lionel Henry",
-        "tidyr", "Hadley Wickham",
-        "stringr", "Hadley Wickham",
-        "rlang", "Lionel Henry",
-        "tibble", "Kirill Müller",
-        "tidyselect", "Lionel Henry") %>% 
-  arrange(package)
+pkg_dat <- data.frame(package = c("dplyr", "magrittr", "rlang", "stringr", "tibble", "tidyr", "tidyselect"), 
+                      maintainer = c("Hadley Wickham", "Lionel Henry", "Lionel Henry", "Hadley Wickham", "Kirill Müller", "Hadley Wickham", "Lionel Henry"))
 ```
 
+:::
+
 ```{r, echo = FALSE}
-pkg_dat <- tribble(~package, ~maintainer,
-        "dplyr", "Hadley Wickham",
-        "magrittr", "Lionel Henry",
-        "tidyr", "Hadley Wickham",
-        "stringr", "Hadley Wickham",
-        "rlang", "Lionel Henry",
-        "tibble", "Kirill Müller",
-        "tidyselect", "Lionel Henry") %>% 
-  arrange(package)
 pkg_dat %>% 
   knitr::kable(caption = "pkg_dat") %>% 
   kableExtra::kable_styling()
@@ -502,8 +665,8 @@ pkg_dat %>%
 🎯 separate maintainer name to columns, first name and last name
 
 
-```{r}
-pkg_dat %>% 
+```{webr-r}
+pkg_dat |>  
   separate(maintainer, 
            into = c("first_name", "last_name"),
            sep = " ")
@@ -521,19 +684,16 @@ pkg_dat %>%
 
 ::: {.w-40}
 
+::: f3
+
 ```{r}
 #| code-fold: true
 #| code-summary: "Data"
-author_dat <- tribble(~package, ~author,
-        "dplyr", "Hadley Wickham, Romain François, Lionel Henry, Kirill Müller",
-        "magrittr", "Lionel Henry, Stefan Milton Bache, Hadley Wickham",
-        "tidyr", "Hadley Wickham",
-        "stringr", "Hadley Wickham",
-        "rlang", "Lionel Henry, Hadley Wickham",
-        "tibble", "Kirill Müller, Hadley Wickham",
-        "tidyselect", "Lionel Henry, Hadley Wickham") %>% 
-  arrange(package)
+author_dat <- data.frame(package = c("dplyr", "magrittr", "rlang", "stringr", "tibble", "tidyr", "tidyselect"), 
+                         author = c("Hadley Wickham, Romain François, Lionel Henry, Kirill Müller", "Lionel Henry, Stefan Milton Bache, Hadley Wickham", "Lionel Henry, Hadley Wickham", "Hadley Wickham", "Kirill Müller, Hadley Wickham", "Hadley Wickham", "Lionel Henry, Hadley Wickham"))
 ```
+
+:::
 
 
 ```{r, echo = FALSE}
@@ -547,8 +707,8 @@ author_dat %>%
 
 ::: {.w-60 .pl3 .fragment}
 
-```{r}
-author_dat %>% 
+```{webr-r}
+author_dat |>  
   separate_rows(author, sep = ", ")
 ```
 
@@ -558,6 +718,9 @@ author_dat %>%
 :::
 
 ## Summary
+
+- `tidyr` functions `pivot_longer` and `pivot_wider` are used to convert data between long and wide formats.
+- `separate` and `separate_rows` functions are used to split a single column into multiple columns or rows.
 
 
 # Exercise time {background-color="#F5EDDE"}
