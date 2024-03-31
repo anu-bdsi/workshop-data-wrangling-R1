@@ -1,0 +1,395 @@
+---
+format: 
+  pdf:
+    output-file: "exercise1-printout"
+    include-in-header:
+      text: |
+        \usepackage{bera}
+execute: 
+  echo: false
+---
+
+```{r setup}
+#| include: false
+library(tidyverse)
+```
+
+
+
+
+```{r}
+spreadsheet_frame <- function(nrow, ncol) {
+  bind_rows(tibble(row = 1, col = 1:(ncol + 1),
+                   value = c("", LETTERS[1:ncol]),
+                   fill = "#e3e3e3"),
+            tibble(col = 1, row = 2:(nrow + 1),
+                   value = as.character(1:nrow),
+                   fill = "#e3e3e3"))
+}
+
+spreadsheet_values <- function(X) {
+  tibble(value = as.vector(X)) |> 
+    mutate(row = as.vector(row(X)) + 1,
+           col = as.vector(col(X)) + 1,
+           fill = "white") 
+}
+
+plot_spreadsheet <- function(X) {
+  cat(paste0("## Spreadsheet ", spread_id(), "\n\n"))
+  
+  bind_rows(spreadsheet_values(X),
+            spreadsheet_frame(nrow(X), ncol(X))) |> 
+    ggplot(aes(col, row)) +
+    geom_tile(aes(fill = I(fill)), color = "black") + 
+    geom_text(aes(label = value)) +
+    scale_y_reverse() +
+    theme_void() 
+}
+
+mat0 <- matrix(c("Date", "Assay date", "Weight",
+                 "", "12/9/05", "54.9",
+                 "", "12/9/05", "45.3",
+                 "12/6/2005", "e", "47",
+                 "", "e", "45.7",
+                 "", "e", "52.9",
+                 "", "1/11/2006", "46.1",
+                 "", "1/11/2006", "38.6"), ncol = 3, byrow = TRUE)
+
+
+mat1 <- matrix(c("id", "date", "glucose",
+                 "101", "2015-06-14", "149.3",
+                 "102", "", "95.3",
+                 "103", "2015-06-18", "97.5",
+                 "104", "", "117.0",
+                 "105", "", "108.0",
+                 "106", "2015-06-20", "149.0",
+                 "107", "", "169.4"), ncol = 3, byrow = TRUE)
+
+mat2 <- matrix(c("", "1 min", "", "", "", "5 min", "", "", "",
+                 "strain", "normal", "", "mutant", "", "normal", "", "mutant", "",
+                 "A", "147", "139", "166", "179", "334", "354", "451", "474",
+                 "B", "246", "240", "178", "172", "514", "611", "412", "447"), ncol = 9, byrow = TRUE)
+
+mat3 <- matrix(c("strain", "genotype", "time_min", "replicate", "response",
+                 "A", "normal", "1", "1", "147",
+                 "A", "normal", "1", "2", "139",
+                 "B", "normal", "1", "1", "246",
+                 "B", "normal", "1", "2", "240",
+                 "A", "mutant", "1", "1", "166",
+                 "A", "mutant", "1", "2", "179",
+                 "B", "mutant", "1", "1", "178",
+                 "B", "mutant", "1", "2", "172",
+                 "A", "normal", "5", "1", "334",
+                 "A", "normal", "5", "2", "354",
+                 "B", "normal", "5", "1", "514",
+                 "B", "normal", "5", "2", "611",
+                 "A", "mutant", "5", "1", "451",
+                 "A", "mutant", "5", "2", "474",
+                 "B", "mutant", "5", "1", "412",
+                 "B", "mutant", "5", "2", "447"), ncol = 5, byrow = TRUE)
+
+
+mat4 <- matrix(c("id", "sex", "glucose", "insulin", "triglyc",
+                 "101", "Male", "134.1", "0.60", "273.4",
+                 "102", "Female", "120.0", "1.18", "243.6",
+                 "103", "Male", "124.8", "1.23", "297.6",
+                 "104", "Male", "83.1", "1.16", "142.4",
+                 "105", "Male", "105.2", "0.73", "215.7"), ncol = 5, byrow = TRUE)
+
+mat5 <- matrix(c("", "", "", "", "", "",
+                 "", "101", "102", "103", "104", "105",
+                 "sex", "Male", "Female", "Male", "Male", "Male",
+                 "", "", "", "", "", "",
+                 "", "101", "102", "103", "104", "105",
+                 "glucose", "134.1", "120.0", "124.8", "83.1", "105.2",
+                 "", "", "", "", "", "",
+                 "", "101", "102", "103", "104", "105",
+                 "insulin", "0.60", "1.18", "1.23", "1.16", "0.73",
+                 "", "", "", "", "", "",
+                 "", "101", "102", "103", "104", "105",
+                 "triglyc", "273.4", "243.6", "297.6", "142.4", "215.7"), ncol = 6, byrow = TRUE)
+
+mat6 <- matrix(c("1MIN", "", "", "", "", "", "",
+                 "", "", "Normal", "", "", "Mutant", "",
+                 "B6", "146.6", "138.6", "155.6", "166", "179.3", "186.9",
+                 "BTBR", "245.7", "240", "243.1", "177.8", "171.6", "188.1",
+                 "", "", "", "", "", "", "",
+                 "5MIN", "", "", "", "", "", "",
+                 "", "", "Normal", "", "", "Mutant", "",
+                 "B6", "333.6", "353.6", "408.8", "450.6", "474.4", "423.8",
+                 "BTBR", "514.4", "610.6", "597.9", "412.1", "447.4", "446.5"), ncol = 7, byrow = TRUE)
+
+mat7 <- matrix(c("", "", "", "", "", "", "",
+                 "Date", "11/3/14", "", "", "", "", "",
+                 "Days on diet", "126", "", "", "", "", "",
+                 "Mouse #", "43", "", "", "", "", "",
+                 "sex", "f", "", "", "", "", "",
+                 "experiment", "", "values", "", "", "mean", "SD",
+                 "control", "", "0.186", "0.191", "1.081", "0.49", "0.52",
+                 "treatment A", "", "7.414", "1.468", "2.254", "3.71", "3.23",
+                 "treatment B", "", "9.811", "9.259", "11.296", "10.12", "1.05",
+                 "", "", "", "", "", "", "",
+                 "fold change", "", "values", "", "", "mean", "SD",
+                 "treatment A", "", "15.26", "3.02", "4.64", "7.64", "6.65",
+                 "treatment B", "", "20.19", "19.05", "23.24", "20.83", "2.17"), ncol = 7, byrow = TRUE)
+
+mat8 <- matrix(c("", "GTT date", "GTT weight", "time", "glucose mg/dl", "insulin ng/ml",
+                 "321", "2/9/15", "24.5", "0", "99.2", "lo off curve",
+                 "", "", "", "5", "349.3", "0.205",
+                 "", "", "", "15", "286.1", "0.129",
+                 "", "", "", "30", "312", "0.175",
+                 "", "", "", "60", "99.9", "0.122",
+                 "", "", "", "120", "217.9", "lo off curve",
+                 "322", "2/9/15", "18.9", "0", "185.8", "0.251",
+                 "", "", "", "5", "297.4", "2.228",
+                 "", "", "", "15", "439", "2.078",
+                 "", "", "", "30", "362.3", "0.775",
+                 "", "", "", "60", "232.7", "0.5",
+                 "", "", "", "120", "260.7", "0.523",
+                 "323", "2/9/15", "24.7", "0", "198.5", "0.151",
+                 "", "", "", "5", "530.6", "off curve lo"), ncol = 6, byrow = TRUE)
+
+mat9 <- matrix(c("id", "GTT date", "GTT weight",
+                 "321", "2/9/15", "24.5",
+                 "322", "2/9/15", "18.9",
+                 "323", "2/9/15", "24.7"), ncol = 3, byrow = TRUE)
+
+mat10 <- matrix(c("id", "GTT time", "glucose mg/dl", "insulin ng/ml", "note",
+                  "321", "0", "99.2", "NA", "insulin below curve",
+                  "321", "5", "349.3", "0.205", "",
+                  "321", "15", "286.1", "0.129", "",
+                  "321", "30", "312", "0.175", "",
+                  "321", "60", "99.9", "0.122", "",
+                  "321", "120", "217.9", "NA", "insulin below curve",
+                  "322", "0", "185.8", "0.251", "",
+                  "322", "5", "297.4", "2.228", "",
+                  "322", "15", "439", "2.078", "",
+                  "322", "30", "362.3", "0.775", "",
+                  "322", "60", "232.7", "0.5", "",
+                  "322", "120", "260.7", "0.523", "",
+                  "323", "0", "198.5", "0.151", "",
+                  "323", "5", "530.6", "NA", "insulin below curve"), ncol = 5, byrow = TRUE)
+
+
+mat11 <- matrix(c("id", "date", "glucose",
+                 "101", "2015-06-14", "149.3",
+                 "102", "2015-06-14", "95.3",
+                 "103", "2015-06-18", "97.5",
+                 "104", "2015-06-18", "117.0",
+                 "105", "2015-06-18", "108.0",
+                 "106", "2015-06-20", "149.0",
+                 "107", "2015-06-20", "169.4"), ncol = 3, byrow = TRUE)
+
+mat12 <- matrix(c("", "", "week 4", "", "", "week 6", "", "", "week 8", "", "",
+                  "Mouse ID", "SEX", "date", "weight", "glucose", "date", "weight", "glucose", "date", "weight", "glucose",
+                  "3005", "M", "3/30/2007", "19.3", "635", "4/11/2007", "31", "460.7", "4/27/2007", "39.6", "530.2",
+                  "3017", "M", "10/6/2006", "25.9", "202.4", "10/19/2006", "45.1", "384.7", "11/3/2006", "57.2", "458.7",
+                  "3434", "F", "11/22/2006", "26.6", "238.9", "12/6/2006", "45.9", "378", "12/22/2006", "56.2", "409.8",
+                  "3449", "M", "1/5/2007", "27.5", "121", "1/19/2007", "42.9", "191.3", "2/2/2007", "56.7", "182.5",
+                  "3499", "F", "1/5/2007", "19.8", "220.2", "1/19/2007", "36.6", "556.9", "2/2/2007", "43.6", "446"), ncol = 11, byrow = TRUE)
+
+mat13 <- matrix(c("mouse_id", "sex", "week", "date", "glucose", "weight",
+                  "3005", "M", "4", "3/30/2007", "19.3", "635",
+                  "3005", "M", "6", "4/11/2007", "31", "460.7",
+                  "3005", "M", "8", "4/27/2007", "39.6", "530.2",
+                  "3017", "M", "4", "10/6/2006", "25.9", "202.4",
+                  "3017", "M", "6", "10/19/2006", "45.1", "384.7",
+                  "3017", "M", "8", "11/3/2006", "57.2", "458.7",
+                  "3434", "F", "4", "11/22/2006", "26.6", "238.9",
+                  "3434", "F", "6", "12/6/2006", "45.9", "378",
+                  "3434", "F", "8", "12/22/2006", "56.2", "409.8",
+                  "3449", "M", "4", "1/5/2007", "27.5", "121",
+                  "3449", "M", "6", "1/19/2007", "42.9", "191.3",
+                  "3449", "M", "8", "2/2/2007", "56.7", "182.5",
+                  "3499", "F", "4", "1/5/2007", "19.8", "220.2",
+                  "3499", "F", "6", "1/19/2007", "36.6", "556.9",
+                  "3499", "F", "8", "2/2/1007", "43.6", "446"), ncol = 6, byrow = TRUE)
+
+
+mat14 <- matrix(c("rep", "control", "treatment A", "treatment B",
+                  "1", "0.186", "7.414", "9.811",
+                  "2", "0.191", "1.468", "9.259",
+                  "3", "1.081", "2.254", "11.296"), ncol = 4, byrow = TRUE)
+
+mat15 <- matrix(c("rep", "treatment", "value",
+                  "1", "control", "0.186",
+                  "2", "control", "0.191",
+                  "3", "control", "1.081",
+                  "1", "A", "7.414",
+                  "2", "A", "1.468",
+                  "3", "A", "2.254",
+                  "1", "B", "9.811",
+                  "2", "B", "9.259",
+                  "3", "B", "11.296"), ncol = 3, byrow = TRUE)
+
+mat16 <- matrix(c("mice", "time_min", "genotype", "replicate", "value",
+                  "B6", "1", "normal", "1", "146.6",
+                  "B6", "1", "normal", "2", "138.6",
+                  "B6", "1", "normal", "3", "155.6",
+                  "B6", "1", "mutant", "1", "166",
+                  "B6", "1", "mutant", "2", "179.3",
+                  "B6", "1", "mutant", "3", "186.9",
+                  "BTBR", "1", "normal", "1", "245.7",
+                  "BTBR", "1", "normal", "2", "240",
+                  "BTBR", "1", "normal", "3", "243.1",
+                  "BTBR", "1", "mutant", "1", "177.8",
+                  "BTBR", "1", "mutant", "2", "171.6",
+                  "BTBR", "1", "mutant", "3", "188.1",
+                  "B6", "5", "normal", "1", "333.6",
+                  "B6", "5", "normal", "2", "353.6",
+                  "B6", "5", "normal", "3", "408.8",
+                  "B6", "5", "mutant", "1", "450.6",
+                  "B6", "5", "mutant", "2", "474.4",
+                  "B6", "5", "mutant", "3", "423.8",
+                  "BTBR", "5", "normal", "1", "514.4",
+                  "BTBR", "5", "normal", "2", "610.6",
+                  "BTBR", "5", "normal", "3", "597.9",
+                  "BTBR", "5", "mutant", "1", "412.1",
+                  "BTBR", "5", "mutant", "2", "447.4",
+                  "BTBR", "5", "mutant", "3", "446.5"), ncol = 5, byrow = TRUE)
+
+mats <- map(list(mat1, mat2, mat3, mat4, mat5, mat6, mat7, mat8, mat9, mat10, mat11, mat12, mat13, mat14, mat15, mat6),
+            as.data.frame)
+names(mats) <- paste0("Spreadsheet ", 1:length(mats))
+writexl::write_xlsx(mats, "exercise1-spreadsheets.xlsx", col_names = FALSE)
+
+
+
+i <- 0
+spread_id <- function() (i <<- i + 1)
+```
+
+
+
+```{r}
+#| eval: false
+#| fig-height: 3
+#| fig-width: 4
+#| results: asis
+plot_spreadsheet(mat0)
+```
+
+
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+#| results: asis
+plot_spreadsheet(mat1)
+```
+
+
+```{r}
+#| fig-height: 1.5
+#| fig-width: 7
+#| results: asis
+plot_spreadsheet(mat2)
+```
+
+
+```{r}
+#| fig-height: 6
+#| fig-width: 5
+#| results: asis
+plot_spreadsheet(mat3)
+```
+
+
+```{r}
+#| fig-height: 2.5
+#| fig-width: 5
+#| results: asis
+plot_spreadsheet(mat4)
+```
+
+
+```{r}
+#| fig-height: 4
+#| fig-width: 6
+#| results: asis
+plot_spreadsheet(mat5)
+```
+
+
+```{r}
+#| fig-height: 3
+#| fig-width: 6
+#| results: asis
+plot_spreadsheet(mat6)
+```
+
+
+```{r}
+#| fig-height: 5
+#| fig-width: 8
+#| results: asis
+plot_spreadsheet(mat7)
+```
+
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| results: asis
+plot_spreadsheet(mat8)
+```
+
+\newpage
+
+
+```{r}
+#| results: asis
+#| fig-height: 2
+#| fig-width: 3.8
+plot_spreadsheet(mat9)
+```
+
+
+```{r}
+#| fig-height: 6
+#| fig-width: 9
+#| results: asis
+plot_spreadsheet(mat10)
+```
+
+```{r}
+#| fig-height: 3
+#| fig-width: 5
+#| results: asis
+plot_spreadsheet(mat11)
+```
+
+```{r}
+#| fig-height: 3
+#| fig-width: 10.5
+#| results: asis
+plot_spreadsheet(mat12)
+```
+
+
+```{r}
+#| fig-height: 6
+#| fig-width: 8
+#| results: asis
+plot_spreadsheet(mat13)
+```
+
+```{r}
+#| fig-height: 1.5
+#| fig-width: 5
+#| results: asis
+plot_spreadsheet(mat14)
+```
+
+```{r}
+#| fig-height: 3
+#| fig-width: 4
+#| results: asis
+plot_spreadsheet(mat15)
+```
+
+```{r}
+#| fig-height: 8
+#| fig-width: 6
+#| results: asis
+plot_spreadsheet(mat16)
+```

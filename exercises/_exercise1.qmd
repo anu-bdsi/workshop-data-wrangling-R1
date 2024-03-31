@@ -8,15 +8,5 @@ format:
       - ../assets/webex.js
 ---
 
-```{r}
-#| include: false
-library(webexercises)
-```
 
-
-```{webr-r}
-
-
-
-
-```
+From the print handouts (given out in the workshop), discuss with your group about whether the data are organised as tidy data for each spreadsheet. If it is not a tidy data, then how would you organise it so that it is tidy?
