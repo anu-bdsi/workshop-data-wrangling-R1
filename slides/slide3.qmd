@@ -719,8 +719,37 @@ author_dat |>
 
 ## Summary
 
-- `tidyr` functions `pivot_longer` and `pivot_wider` are used to convert data between long and wide formats.
-- `separate` and `separate_rows` functions are used to split a single column into multiple columns or rows.
+::: flex
+
+::: {.w-50}
+
+- `tidyr` package provides tools for data cleaning and reshaping.
+- `pivot_longer()` and `pivot_wider()` are used to convert data between long and wide formats.
+- `separate()` and `separate_rows()` functions are used to split a single column into multiple columns or rows.
+
+:::
+
+::: {.w-50 .pl3}
+
+<center>
+
+![](images/tidyr-pivoting.gif)
+
+</center>
+
+:::
+
+:::
+
+
+
+
+::: aside
+
+Animation from [tidyexplain](https://github.com/gadenbuie/tidyexplain/tree/main) by Garrick Aden-Buie.
+
+:::
+
 
 
 ## `tidyr` cheatsheet
