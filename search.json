@@ -469,6 +469,13 @@
     "text": "Summary\n\ntidyr functions pivot_longer and pivot_wider are used to convert data between long and wide formats.\nseparate and separate_rows functions are used to split a single column into multiple columns or rows."
   },
   {
+    "objectID": "slides/slide3.html#tidyr-cheatsheet",
+    "href": "slides/slide3.html#tidyr-cheatsheet",
+    "title": "Pivotting data",
+    "section": "tidyr cheatsheet",
+    "text": "tidyr cheatsheet\n\n\n\n\n\n\n\n\n\n\n dplyr cheatsheet"
+  },
+  {
     "objectID": "help.html",
     "href": "help.html",
     "title": "Help",
