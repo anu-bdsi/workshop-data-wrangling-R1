@@ -161,18 +161,102 @@
     "text": "dplyr structure\n\nFunctions in dplyr generally have the form:\n\n\nverb(data, args)\n\n\nThe first argument data is a data.frame object.\n\n\n\nWhat do you think the following will do?\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
-    "objectID": "slides/slide2.html#base-r-and-tidyverse",
-    "href": "slides/slide2.html#base-r-and-tidyverse",
+    "objectID": "slides/slide2.html#pipe-operator",
+    "href": "slides/slide2.html#pipe-operator",
     "title": "Welcome to Tidyverse",
-    "section": "Base R and Tidyverse",
-    "text": "Base R and Tidyverse\n\n\nTidyverse is not a substitute for Base R\nKnowing Base R is essential to use Tidyverse effectively\n\n\n\n\nData wrangling in Tidyverse just gives you a different flavour of how you can do things in Base R.\nAll data wrangling can be achieved using Base R, so why load extra package(s) to deal with the data wrangling? 🤔\nTidyverse packages share a common design philosophy, grammar and data structure\nThis trains your mental model to do data science tasks in a certain manner which may make it easier, faster, and/or fun for you to do these tasks\nIt’s an opinionated approach so you should make a decision for yourself of what works for you and others that you share your work with"
+    "section": "Pipe operator",
+    "text": "Pipe operator\n\n\nAlmost all the tidyverse packages use the pipe operator %&gt;% from the magrittr package.\nR version 4.1.0 introduced a native pipe operator |&gt; which is similar to %&gt;% but with some differences.\nx |&gt; f(y) is the same as f(x, y).\nx |&gt; f(y) |&gt; g(z) is the same as g(f(x, y), z).\nWhen you see the pipe operator, read it as “and then”.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#tidyselect",
+    "href": "slides/slide2.html#tidyselect",
+    "title": "Welcome to Tidyverse",
+    "section": "Tidyselect",
+    "text": "Tidyselect\n\nTidyverse packages generally use syntax from the tidyselect package for column selection.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#selection-language",
+    "href": "slides/slide2.html#selection-language",
+    "title": "Welcome to Tidyverse",
+    "section": "Selection language",
+    "text": "Selection language\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#tibble-tidyverse",
+    "href": "slides/slide2.html#tibble-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "tibble (Tidyverse)",
+    "text": "tibble (Tidyverse)\n\ntibble is a modern reimagining of the data.frame object.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#subsetting-by-column-tidyverse",
+    "href": "slides/slide2.html#subsetting-by-column-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Subsetting by column (Tidyverse)",
+    "text": "Subsetting by column (Tidyverse)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#subsetting-by-row-tidyverse",
+    "href": "slides/slide2.html#subsetting-by-row-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Subsetting by row (Tidyverse)",
+    "text": "Subsetting by row (Tidyverse)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#adding-or-modifying-a-column-tidyverse",
+    "href": "slides/slide2.html#adding-or-modifying-a-column-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Adding or modifying a column (Tidyverse)",
+    "text": "Adding or modifying a column (Tidyverse)\n\nmtcars |&gt; mutate(gpm = 1/mpg)\n\n                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb\nMazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2\nValiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1\nDuster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4\nMerc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2\nMerc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2\nMerc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4\nMerc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4\nMerc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3\nMerc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3\nMerc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3\nCadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4\nLincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4\nChrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4\nFiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1\nHonda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2\nToyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1\nToyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1\nDodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2\nAMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2\nCamaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4\nPontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2\nFiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1\nPorsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2\nLotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2\nFord Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4\nFerrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6\nMaserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8\nVolvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2\n                           gpm\nMazda RX4           0.04761905\nMazda RX4 Wag       0.04761905\nDatsun 710          0.04385965\nHornet 4 Drive      0.04672897\nHornet Sportabout   0.05347594\nValiant             0.05524862\nDuster 360          0.06993007\nMerc 240D           0.04098361\nMerc 230            0.04385965\nMerc 280            0.05208333\nMerc 280C           0.05617978\nMerc 450SE          0.06097561\nMerc 450SL          0.05780347\nMerc 450SLC         0.06578947\nCadillac Fleetwood  0.09615385\nLincoln Continental 0.09615385\nChrysler Imperial   0.06802721\nFiat 128            0.03086420\nHonda Civic         0.03289474\nToyota Corolla      0.02949853\nToyota Corona       0.04651163\nDodge Challenger    0.06451613\nAMC Javelin         0.06578947\nCamaro Z28          0.07518797\nPontiac Firebird    0.05208333\nFiat X1-9           0.03663004\nPorsche 914-2       0.03846154\nLotus Europa        0.03289474\nFord Pantera L      0.06329114\nFerrari Dino        0.05076142\nMaserati Bora       0.06666667\nVolvo 142E          0.04672897\n\nmtcars |&gt; mutate(engine = case_when(vs==0 ~ \"V-shaped\",\n                                    vs==1 ~ \"Straight\"),\n                 transmission = ifelse(am==0, \"Automatic\", \"Manual\"))\n\n                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb\nMazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2\nValiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1\nDuster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4\nMerc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2\nMerc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2\nMerc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4\nMerc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4\nMerc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3\nMerc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3\nMerc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3\nCadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4\nLincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4\nChrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4\nFiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1\nHonda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2\nToyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1\nToyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1\nDodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2\nAMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2\nCamaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4\nPontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2\nFiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1\nPorsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2\nLotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2\nFord Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4\nFerrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6\nMaserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8\nVolvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2\n                      engine transmission\nMazda RX4           V-shaped       Manual\nMazda RX4 Wag       V-shaped       Manual\nDatsun 710          Straight       Manual\nHornet 4 Drive      Straight    Automatic\nHornet Sportabout   V-shaped    Automatic\nValiant             Straight    Automatic\nDuster 360          V-shaped    Automatic\nMerc 240D           Straight    Automatic\nMerc 230            Straight    Automatic\nMerc 280            Straight    Automatic\nMerc 280C           Straight    Automatic\nMerc 450SE          V-shaped    Automatic\nMerc 450SL          V-shaped    Automatic\nMerc 450SLC         V-shaped    Automatic\nCadillac Fleetwood  V-shaped    Automatic\nLincoln Continental V-shaped    Automatic\nChrysler Imperial   V-shaped    Automatic\nFiat 128            Straight       Manual\nHonda Civic         Straight       Manual\nToyota Corolla      Straight       Manual\nToyota Corona       Straight    Automatic\nDodge Challenger    V-shaped    Automatic\nAMC Javelin         V-shaped    Automatic\nCamaro Z28          V-shaped    Automatic\nPontiac Firebird    V-shaped    Automatic\nFiat X1-9           Straight       Manual\nPorsche 914-2       V-shaped       Manual\nLotus Europa        Straight       Manual\nFord Pantera L      V-shaped       Manual\nFerrari Dino        V-shaped       Manual\nMaserati Bora       V-shaped       Manual\nVolvo 142E          Straight       Manual"
+  },
+  {
+    "objectID": "slides/slide2.html#adding-a-row-tidyverse",
+    "href": "slides/slide2.html#adding-a-row-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Adding a row (Tidyverse)",
+    "text": "Adding a row (Tidyverse)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#sorting-columns-tidyverse",
+    "href": "slides/slide2.html#sorting-columns-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Sorting columns (Tidyverse)",
+    "text": "Sorting columns (Tidyverse)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#sorting-rows-tidyverse",
+    "href": "slides/slide2.html#sorting-rows-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Sorting rows (Tidyverse)",
+    "text": "Sorting rows (Tidyverse)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#calculating-statistical-summaries-by-group-tidyverse",
+    "href": "slides/slide2.html#calculating-statistical-summaries-by-group-tidyverse",
+    "title": "Welcome to Tidyverse",
+    "section": "Calculating statistical summaries by group (Tidyverse)",
+    "text": "Calculating statistical summaries by group (Tidyverse)\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide2.html#applying-a-function-to-multiple-columns",
+    "href": "slides/slide2.html#applying-a-function-to-multiple-columns",
+    "title": "Welcome to Tidyverse",
+    "section": "Applying a function to multiple columns",
+    "text": "Applying a function to multiple columns\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/slide2.html#summary",
     "href": "slides/slide2.html#summary",
     "title": "Welcome to Tidyverse",
     "section": "Summary",
-    "text": "Summary"
+    "text": "Summary\n\nData wrangling in Tidyverse just gives you a different flavour of how you can do things in Base R.\nTidyverse packages share a common design philosophy, grammar and data structure.\nThis trains your mental model to do data science tasks in a certain manner which may make it easier, faster, and/or fun for you to do these tasks."
+  },
+  {
+    "objectID": "slides/slide2.html#dplyr-cheatsheet",
+    "href": "slides/slide2.html#dplyr-cheatsheet",
+    "title": "Welcome to Tidyverse",
+    "section": "dplyr cheatsheet",
+    "text": "dplyr cheatsheet\n\n\n\n\n\n\n\n\n\n\n dplyr cheatsheet"
   },
   {
     "objectID": "next-time.html",
