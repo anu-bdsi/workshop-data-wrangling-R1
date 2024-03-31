@@ -25,7 +25,7 @@
     "href": "materials.html#schedule",
     "title": "Materials",
     "section": "🕙 Schedule",
-    "text": "🕙 Schedule\n\n\n\n\n\nTime\nContent\n\n\n\n\n10:00–10:15\nTidy data\n\n\n10:15–10:35\nExercise 1\n\n\n10:35–10:45\nDiscuss exercise 1\n\n\n10:45–11:15\nWelcome to Tidyverse\n\n\n11:15–11:30\nExercise 2\n\n\n11:30–11:40\nBreak\n\n\n11:40–12:00\nPivotting data\n\n\n12:00–12:10\nExercise 3\n\n\n12:10–12:40\nRelational data\n\n\n12:40–12:55\nExercise 4\n\n\n12:55–13:00\nWrap up"
+    "text": "🕙 Schedule\n\n\n\n\n\nTime\nContent\n\n\n\n\n10:00–10:15\nTidy data\n\n\n10:15–10:35\nExercise 1\n\n\n10:35–10:45\nDiscuss exercise 1\n\n\n10:45–11:15\nWelcome to Tidyverse\n\n\n11:15–11:30\nExercise 2\n\n\n11:30–11:40\nBreak\n\n\n11:40–12:00\nPivotting data\n\n\n12:00–12:10\nExercise 3\n\n\n12:10–12:40\nJoining two datasets\n\n\n12:40–12:55\nExercise 4\n\n\n12:55–13:00\nWrap up"
   },
   {
     "objectID": "materials.html#resources",
@@ -44,14 +44,14 @@
   {
     "objectID": "slides/slide4.html#current-learning-objective",
     "href": "slides/slide4.html#current-learning-objective",
-    "title": "Relational data",
+    "title": "Joining two datasets",
     "section": " Current learning objective",
     "text": "Current learning objective\n\n\n-Recognize the characteristics of tidy data\n\n\n-Differentiate between the Base and Tidyverse paradigms\n\n\n-Acquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using dplyr\n\n\n-Pivot data into longer or wider format using tidyr\n\n\nJoin datasets using dplyr"
   },
   {
     "objectID": "slides/slide4.html#summary",
     "href": "slides/slide4.html#summary",
-    "title": "Relational data",
+    "title": "Joining two datasets",
     "section": "Summary",
     "text": "Summary"
   },
@@ -466,7 +466,7 @@
     "href": "slides/slide3.html#summary",
     "title": "Pivotting data",
     "section": "Summary",
-    "text": "Summary\n\ntidyr functions pivot_longer and pivot_wider are used to convert data between long and wide formats.\nseparate and separate_rows functions are used to split a single column into multiple columns or rows."
+    "text": "Summary\n\n\n\ntidyr package provides tools for data cleaning and reshaping.\npivot_longer() and pivot_wider() are used to convert data between long and wide formats.\nseparate() and separate_rows() functions are used to split a single column into multiple columns or rows.\n\n\n\n\n\n\n\n\n\n\nAnimation from tidyexplain by Garrick Aden-Buie."
   },
   {
     "objectID": "slides/slide3.html#tidyr-cheatsheet",
