@@ -723,6 +723,32 @@ author_dat |>
 - `separate` and `separate_rows` functions are used to split a single column into multiple columns or rows.
 
 
+## `tidyr` cheatsheet
+
+::: flex
+
+::: {.w-50}
+
+![](assets/tidyr-cheatsheet_Page_1.png){.ba}
+
+:::
+
+::: {.w-50 .pl3}
+
+![](assets/tidyr-cheatsheet_Page_2.png){.ba}
+
+
+:::
+
+:::
+
+::: aside
+
+[<i class='fas fa-file-pdf'></i> dplyr cheatsheet](assets/tidyr-cheatsheet.pdf)
+
+:::
+
+
 # Exercise time {background-color="#F5EDDE"}
 
 
