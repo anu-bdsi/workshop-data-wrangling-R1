@@ -1,0 +1,5 @@
+"0","help(mutate_each, package = ""dplyr"") # deprecated
+help(sample_frac, package = ""dplyr"")
+help(mutate, package = ""dplyr"") # look the .by argument"
+"2","/bin/sh: webr-r: command not found
+"

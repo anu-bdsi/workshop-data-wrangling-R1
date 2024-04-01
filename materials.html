@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -255,6 +289,35 @@ You should be able to:
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agridat)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>aastveit.barley.covs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  year   R1   R2   R3   R4   R5   R6   S1   S2   S3   S4   S5   S6 ST    T1
+1 1974 0.00 0.16 1.59 2.65 1.70 2.21 2.26 2.74 2.57 2.25 2.67 2.36 17  8.36
+2 1975 1.66 1.84 1.68 0.08 0.02 0.01 1.94 1.85 2.37 3.02 3.15 2.95 21  7.66
+3 1976 0.80 2.05 0.81 0.40 1.02 1.06 2.01 2.31 2.27 2.96 2.66 2.81 26  7.50
+4 1977 0.21 3.62 0.36 3.46 0.15 4.65 2.89 2.06 2.98 2.82 2.44 1.89 48 12.72
+5 1978 0.37 0.66 0.75 6.72 3.32 0.88 1.84 2.29 2.66 1.77 2.03 2.35 35  8.44
+6 1979 1.35 3.92 1.05 2.22 0.86 2.49 1.63 2.21 2.34 2.40 2.13 2.27 39  8.14
+7 1980 0.67 3.45 2.75 6.20 1.05 3.60 2.76 1.85 2.25 1.98 2.13 1.79 35 12.57
+8 1981 0.23 3.20 4.36 3.01 4.14 0.54 2.33 1.79 2.07 1.71 2.24 2.46 38 14.90
+9 1982 2.58 3.29 0.01 2.76 3.31 2.54 1.78 1.72 2.80 2.29 2.13 2.48 27  7.16
+     T2    T3    T4    T5    T6
+1  9.60 12.11 12.13 18.43 13.75
+2 11.66 10.06 15.95 16.49 18.34
+3 12.13 13.08 17.44 18.88 18.66
+4 12.73 17.39 17.43 13.78 13.88
+5 16.43 15.63 13.91 14.54 13.81
+6 15.13 14.47 14.05 15.83 14.96
+7 11.51 17.91 13.90 16.15 14.84
+8 12.81 11.85 13.63 16.40 15.82
+9 10.63 15.83 11.56 13.16 18.91</code></pre>
+</div>
+</div>
+<ul>
+<li>medicaldata</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
