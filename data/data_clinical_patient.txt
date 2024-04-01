@@ -1,0 +1,69 @@
+#Patient Identifier	Overall Survival Status	Overall Survival (Months)	Sex	Age at Diagnosis	Cohort	Treatment	Dosage	Response Duration (Weeks)	Durable Clinical Benefit	M Stage	Tumor Site	Treatment Response
+#Patient Identifier	Overall Survival Status	Overall survival in months since diagnosis	Sex	Age in years at diagnosis	Cohort.	Treatment	Dosage	Response duration in weeks	Durable Clinical Benefit	M Stage	Tumor Site	Treatment Response
+#STRING	STRING	NUMBER	STRING	NUMBER	STRING	STRING	STRING	NUMBER	STRING	STRING	STRING	STRING
+#1	1	1	1	1	1	1	1	1	1	1	1	1
+PATIENT_ID	OS_STATUS	OS_MONTHS	SEX	AGE	COHORT	TREATMENT	DOSAGE	RESPONSE_DURATION	DURABLE_CLINICAL_BENEFIT	M_STAGE	TUMOR_SITE	TREATMENT_RESPONSE
+CR0095	0:LIVING	67.89041	Male	74	Discovery_Set	Ipilimumab	10x22	65	LB	M1b	groin metastasis	response
+CR04885	0:LIVING	25.6	Female	49	Validation_Set	Tremelimumab	15x4	85	LB	M0	scalp metastasis	nonresponse
+CR06670	1:DECEASED	44.4	Female	79	Validation_Set	Tremelimumab	15x4	168	LB	M0	left thigh metastasis	response
+CR1509	0:LIVING	53.85205	Female	54	Discovery_Set	Ipilimumab	10x14	72	LB	M1c	gluteal metastasis	nonresponse
+CR22640	0:LIVING	51.2	Male	71	Validation_Set	Ipilimumab	3x4	216	LB	M1c	lung metastasis	response
+CR3665	0:LIVING	31.85753	Male	70	Discovery_Set	Ipilimumab	3x4	48	LB	M1b	breast metastasis	nonresponse
+CR4880	0:LIVING	64.30685	Male	63	Discovery_Set	Ipilimumab	10x16	59	LB	M1b	groin metastasis	nonresponse
+CR6126	0:LIVING	22.8	Female	66	Validation_Set	Ipilimumab	3x4	101	LB	M1b	elbow metastasis	nonresponse
+CR6161	1:DECEASED	31.3	Male	81	Validation_Set	Ipilimumab	3x4	136	LB	M1b	left axillary lymph nodes	response
+CR7623	0:LIVING	64.8	Male	62	Discovery_Set	Ipilimumab	10x17	47	NB	M1c	nonresponding adrenal gland metastasis	nonresponse
+CR9306	0:LIVING	63.51781	Male	65	Discovery_Set	Ipilimumab	10x25	42	LB	M1c	coracoid metastasis	response
+CR9699	0:LIVING	52.8	Male	70	Discovery_Set	Ipilimumab	10x19	52	LB	M1c	portal lymph node metastasis	nonresponse
+CRNR0244	0:LIVING	25.2	Male	49	Validation_Set	Ipilimumab	3x4	109	NB	M1c	small bowel nonresponding metastasis	nonresponse
+CRNR2472	0:LIVING	20.4	Male	71	Validation_Set	Ipilimumab	randomized 3 vs 10x4	89	NB	M1c	nonresponding spleen metastasis	
+CRNR4941	0:LIVING	86.4	Female	40	Validation_Set	Ipilimumab	10x20 then 3x1	376	NB	M1c	nonresponding inguinal metastasis	nonresponse
+LSD0167	0:LIVING	32.4	Male	33	Validation_Set	Ipilimumab	3x3	140	LB	M1c	small bowel melanoma	response
+LSD2057	0:LIVING	40.1	Female	36	Validation_Set	Ipilimumab	3x4	64	LB	M1c	left parietal brain metastasis	nonresponse
+LSD3484	0:LIVING	34.8	Male	74	Validation_Set	Ipilimumab	3x4	154	LB	M1c	lymph node metastases	response
+LSD4691	0:LIVING	87.6	Male	62	Validation_Set	Ipilimumab	3x14	383	LB	M1c	vetebral metastasos	nonresponse
+LSD4744	0:LIVING	25.2	Male	52	Validation_Set	Ipilimumab	3x7	80	LB	M1c	not available	
+LSD6819	0:LIVING	40.8	Male	55	Validation_Set	Ipilimumab	3x3	67	LB	M1c	skin nodule	nonresponse
+LSDNR1120	0:LIVING	55.2	Male	68	Validation_Set	Ipilimumab	10x13	242	NB	M1a	L axillary lymph node dissection	response
+LSDNR1650	1:DECEASED	32.4	Female	71	Validation_Set	Ipilimumab	3x7	73	NB	M1c	pubic nonresponding metastsis	nonresponse
+LSDNR3086	1:DECEASED	31.2	Male	43	Validation_Set	Ipilimumab	randomized 0.3, 3 or 10x4; 10x10	135	NB	M1c	nonresponding cutaneous metastasis	response
+LSDNR9298	0:LIVING	50.0	Female	82	Validation_Set	Ipilimumab	3x4	217	NB	M1c	lymph node metastasis	nonresponse
+NR1867	1:DECEASED	18.50959	Male	68	Discovery_Set	Ipilimumab	3x4	23	NB	M1c	groin lymph nodes	nonresponse
+NR2137	0:LIVING	9.8	Male	18	Validation_Set	Ipilimumab	3x4	8	NB	M1c	R occipital brain	nonresponse
+NR3156	1:DECEASED	12.62466	Female	68	Discovery_Set	Ipilimumab	3x4	11	NB	M1b	gluteal metastasis	
+NR3549	1:DECEASED	6.180822	Male	50	Discovery_Set	Ipilimumab	10x3	16	NB	M1c	inguinal lymph nodes	nonresponse
+NR4018	0:LIVING	3.3	Male	55	Validation_Set	Ipilimumab	10x4	11	NB	M1c	skin metastasis	nonresponse
+NR4045	1:DECEASED	20.4	Male	42	Validation_Set	Ipilimumab	3x4	11	NB	M1c	R elbow metastasis	response
+NR4083	1:DECEASED	2.7	Male	54	Validation_Set	Ipilimumab	3x4	12	NB	M1c	not available	nonresponse
+NR4631	1:DECEASED	6.0	Male	59	Validation_Set	Ipilimumab	3x4	13	NB	M1c	CNS metastasis	nonresponse
+NR4810	1:DECEASED	4.8	Female	48	Discovery_Set	Ipilimumab	3x4	12	NB	M1c	small bowel metastasis	response
+NR4949	1:DECEASED	8.350685	Female	79	Discovery_Set	Ipilimumab	10x4	23	NB	M1c	parietal metastasis	nonresponse
+NR5784	1:DECEASED	5.490411	Female	58	Discovery_Set	Ipilimumab	10x4	11	NB	M1c	axillary lymph nodes	nonresponse
+NR6689	1:DECEASED	15.0	Female	46	Validation_Set	Ipilimumab	3x4	11	NB	M1c	L temporal brain metastasis	nonresponse
+NR6721	1:DECEASED	9.6	Male	64	Validation_Set	Ipilimumab	10x4	3	NB	M1a	R chest wall nodular metastasis	nonresponse
+NR6842	1:DECEASED	9.8	Male	64	Validation_Set	Ipilimumab	3x4 then 3x3	12	NB	M1c	R axillary lymph node metastasis	nonresponse
+NR8727	1:DECEASED	5.194521	Male	69	Discovery_Set	Ipilimumab	3x4	13	NB	M1c	axillary lymph nodes	nonresponse
+NR8815	1:DECEASED	14.9	Female	67	Validation_Set	Ipilimumab	3x4	9	NB	M1b	anterior chest, skin metastasis	nonresponse
+NR9341	1:DECEASED	12.13151	Male	77	Discovery_Set	Ipilimumab	3x4	14	NB	M1a	skin nodules	nonresponse
+NR9445	1:DECEASED	2.5	Male	50	Validation_Set	Ipilimumab++vemurafenib	3x3 + vem	8	NB	M1c	abdonimal nodule	nonresponse
+NR9449	1:DECEASED	7.2	Female	64	Validation_Set	Ipilimumab	3x4	10	NB	M1c	small bowel resection	
+NR9521	1:DECEASED	32.4	Male	74	Validation_Set	Ipilimumab	3x4	12	NB	M1b	L arm melanoma	
+NR9705	1:DECEASED	14.4	Female	63	Validation_Set	Ipilimumab	3x4	29	NB	M1c	skin/chest wall metastasis	nonresponse
+NR9765	1:DECEASED	25.0	Female	38	Validation_Set	Ipilimumab	3x4	22	NB	M1b	left inguinal lymph nodes	nonresponse
+PR03803	1:DECEASED	94.6	Male	90	Validation_Set	Tremelimumab	10x6	236	NB	M0	forearm metastasis	
+PR12117	1:DECEASED	18.7	Male	66	Validation_Set	Tremelimumab	15x4	73	LB	M1c	neck lymph node	nonresponse
+PR4035	0:LIVING	50.2	Male	78	Validation_Set	Ipilimumab	3x6	218	LB	M1c	soft tissue metastasis	nonresponse
+PR4046	0:LIVING	25.3	Male	44	Validation_Set	Ipilimumab	10x5	110	LB	M1a	lymph nodes	nonresponse
+PR4077	0:LIVING	72.7	Male	75	Validation_Set	Ipilimumab	10x4	316	LB	M1c	not available	nonresponse
+PR4091	0:LIVING	72.4	Female	65	Validation_Set	Ipilimumab	3x4	314	LB	M1a	skin metastasis	nonresponse
+PR4092	0:LIVING	72.8	Female	57	Validation_Set	Ipilimumab	10x4	315	LB	M1a	lymph nodes	nonresponse
+SD0346	1:DECEASED	34.750679999999996	Female	43	Discovery_Set	Ipilimumab+dacarbazine	10x3 + dacarbazinex6	68	LB	M1b	axillary soft tissue metastasis	nonresponse
+SD1494	0:LIVING	23.70411	Male	70	Discovery_Set	Ipilimumab	3x4	51	LB	M1c	parietal metastasis	response
+SD2051	1:DECEASED	10.1589	Female	61	Discovery_Set	Ipilimumab++vemurafenib	3x5 + vemurafenib	16	NB	M1c	groin lymph node metastases	nonresponse
+SD2056	0:LIVING	47.243840000000006	Female	39	Discovery_Set	Ipilimumab	10x17	208	LB	M1b	lung metastasis	
+SD5038	1:DECEASED	13.9726	Male	55	Discovery_Set	Ipilimumab	10x9	24	NB	M1c	upper back metastasis	nonresponse
+SD5118	1:DECEASED	32.84384	Female	55	Discovery_Set	Ipilimumab	10x4 (09), 3x3 (12)	24	NB	M1c	elbow metastasis	response
+SD5934	1:DECEASED	19.79178	Male	52	Discovery_Set	Ipilimumab	10x6	14	NB	M1c	abdominal tumor nodules	response
+SD6336	0:LIVING	83.37534000000001	Male	53	Discovery_Set	Ipilimumab	10x34	361	LB	M1c	gluteal metastasis	nonresponse
+SD6494	1:DECEASED	8.712328999999999	Female	63	Discovery_Set	Ipilimumab	3x2	13	NB	M1c	small bowel metastasis	
+SD7357	1:DECEASED	24.49315	Female	50	Discovery_Set	Ipilimumab	3x4	21	NB	M1c	skin and breast metastasis	

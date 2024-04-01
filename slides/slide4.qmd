@@ -14,6 +14,12 @@ author: Emi Tanaka
 institute: Biological Data Science Institute
 date: 2024/04/08
 date-format: "D[th] MMMM YYYY"
+filters:
+  - webr
+webr: 
+  show-startup-message: false  
+  packages: 
+    - tidyverse
 ---
 
 
@@ -35,6 +41,17 @@ vctrs::s3_register("knitr::knit_print", "grViz")
 source("setup.R")
 ```
 
+```{webr-r}
+#| context: setup
+library(tidyverse)
+download.file("https://anu-bdsi.github.io/workshop-data-wrangling-R1/data/plots.csv", "plots.csv")
+download.file("https://anu-bdsi.github.io/workshop-data-wrangling-R1/data/species.csv", "species.csv")
+download.file("https://anu-bdsi.github.io/workshop-data-wrangling-R1/data/surveys.csv", "surveys.csv")
+
+plots <- read_csv("plots.csv")
+species <- read_csv("species.csv")
+surveys <- read_csv("surveys.csv")
+```
 
 ```{r}
 #| results: asis 
@@ -42,21 +59,16 @@ source("setup.R")
 learning_objectives(5)
 ```
 
-## Relational data models
-
-- **Relational database** consists of multiple, linked tables. 
-- In tidy data, we considered each:
-  - _variable_ is a _column_, and 
-  - _observation_ is a _row_. 
-- In relational data model, 
-  - _column_ is often referred to as **_attribute_** or **_field_,** and
-  - _row_ is often referred to as **_tuple_** or **_record_**.
 
 
-## Portals database
+## Relational model {auto-animate=true}
+
+::: flex
+
+::: {.w-30  data-id="portals"}
 
 ```{r portals}
-#| fig-width: 4
+#| fig-width: 12
 plots <- read_csv("../data/plots.csv")
 species <- read_csv("../data/species.csv")
 surveys <- read_csv("../data/surveys.csv")
@@ -70,34 +82,190 @@ dm(plots, species, surveys) |>
 ```
 
 
+:::
+
+::: {.w-70 .pl3 .incremental}
+
+- A **relational model** organizes data into one or more tables of columns and rows, with a unique key identifying each row based on Codd (1969, 1970). 
+- Generally, each table represents one _entity type_.
+- **Relational database** is a database based on the relational model of data. 
+
+::: fragment
+
+| Type | Tidy data | Relational model |
+|:---|:---:|:---:|
+| variable | column | attribute/field |
+| observation | row | tuple/record |
+
+:::
+
+:::
+
+:::
+
+
+
+
 
 
 
 
 ::: aside
 
-Ernest, Morgan; Brown, James; Valone, Thomas; White, Ethan P. (2018). Portal Project Teaching Database. figshare. Dataset. https://doi.org/10.6084/m9.figshare.1314459.v10
+
+Codd, E.F (1969), Derivability, Redundancy, and Consistency of Relations Stored in Large Data Banks, Research Report, IBM.  
+Codd, E.F (1970). "A Relational Model of Data for Large Shared Data Banks". Communications of the ACM. Classics. 13 (6): 377–87. doi:10.1145/362384.362685. S2CID 207549016. Archived from the original on 2007-06-12.
 
 :::
 
-## Primary key
+## Primary key {auto-animate=true}
+
+::: flex
+
+::: {.w-70 .pr3}
+
+- A **_primary key_** (sometimes called _candidate key_) is the smallest subset of columns that uniquely identifies each row in a table.
+
+
+```{webr-r}
+surveys
+plots
+species
+```
+
+
+
+:::
+
+::: {.w-30 data-id="portals"}
+
+```{r portals}
+#| fig-width: 12
+```
+
+:::
+
+
+
+:::
+
+
+
+
+::: aside
+
+Data from Ernest, Morgan; Brown, James; Valone, Thomas; White, Ethan P. (2018). Portal Project Teaching Database. figshare. Dataset. <https://doi.org/10.6084/m9.figshare.1314459.v10>
+
+:::
+
+## Simple key & Compound key
+
+::: flex
+
+::: {.w-70 .incremental}
+
+- If only a single column then it is called a **_simple key_**.
+- If a key consists of more than one column then it is called a **_compound key_**.
+- A table can also have no key (violating the relational model).
+
+```{webr-r}
+ChickWeight
+chickwts
+```
+
+:::
+
+::: {.w-30 .pl3}
+
+<center>
+
+```{r chickweight}
+#| fig-width: 6
+dm(ChickWeight) |> 
+  dm_add_pk(ChickWeight, c(Time, Chick)) |> 
+  dm_draw(rankdir = "LR", view_type = "all") 
+```
+
+```{r chickwts}
+#| fig-width: 4.5
+dm(chickwts) |> 
+  dm_draw(rankdir = "LR", view_type = "all") 
+```
+
+</center>
+
+:::
+
+:::
+
+
+
+
 
 ## Foreign key
+
+
+::: flex
+
+::: {.w-70 .pr3}
+
+- A **_foreign key_** is a column in one table that uniquely identifies a row in another table.
+
+
+
+
+```{webr-r}
+surveys
+plots
+species
+```
+
+
+
+:::
+
+::: {.w-30 data-id="portals"}
+
+```{r portals}
+#| fig-width: 12
+```
+
+:::
+
+
+:::
+
+## Joining tables
+
+- To join tables, we use the primary key in one table and the foreign key in another table.
+- In a relational model, a database has **_referential integrity_** if all relations between tables are valid. E.g., 
+  - All primary key values must be unique and not missing.
+  - Each foreign key value must have a corresponding primary key value.
+- In a relational model, **_normalization_** aims to keep data organization as clean and simple as possible by avoiding redundant data entries.
+
+
+
 
 ## Relationships 
 
 - One-to-one 
 - One-to-many
+- Many-to-one
 - Many-to-many
 
 
 # Mutating join
 
+from `dplyr`
 
 
+## Joins from `dplyr`
 
-
-
+```{webr-r}
+left_join(survey, plots, by = "plot_id")  # most common
+right_join(survey, plots, by = "plot_id")
+full_join(survey, plots, by = "plot_id")
+```
 
 
 ## Summary
