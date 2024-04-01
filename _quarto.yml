@@ -2,6 +2,7 @@ project:
   type: website
   resources:
    - "*.pdf"
+   - "*.csv"
 
 website:
   title: "[ANU BDSI<br>workshop]{.tag-label} Data Wrangling with R [Part 1]{.part-label}"
