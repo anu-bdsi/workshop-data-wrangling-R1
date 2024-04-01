@@ -7,7 +7,7 @@ format:
     height: 1080
     auto-stretch: false
     html-math-method: katex
-    self-contained: true
+    self-contained: false
     css: assets/custom.css
     footer: anu-bdsi.github.io/workshop-data-wrangling-R1/
 author: Emi Tanaka
@@ -22,6 +22,16 @@ date-format: "D[th] MMMM YYYY"
 ```{r}
 #| include: false
 library(tidyverse)
+library(dm)
+library(htmltools)
+knit_print.grViz <- function(x, ..., options) {
+  svg <- DiagrammeRsvg::export_svg(x)
+  svg <- sub('[<]polygon fill="#ffffff"[^/]+/[>]\n', "", svg)
+  path <- paste0("images/", options$label, ".svg")
+  writeLines(svg, path)
+  knitr::asis_output(paste0('<img src="', path, '"', ' width="', options$fig.width / 12 * 100, '%"',' />'))
+}
+vctrs::s3_register("knitr::knit_print", "grViz")
 source("setup.R")
 ```
 
@@ -32,8 +42,150 @@ source("setup.R")
 learning_objectives(5)
 ```
 
+## Relational data models
+
+- **Relational database** consists of multiple, linked tables. 
+- In tidy data, we considered each:
+  - _variable_ is a _column_, and 
+  - _observation_ is a _row_. 
+- In relational data model, 
+  - _column_ is often referred to as **_attribute_** or **_field_,** and
+  - _row_ is often referred to as **_tuple_** or **_record_**.
+
+
+## Portals database
+
+```{r portals}
+#| fig-width: 4
+plots <- read_csv("../data/plots.csv")
+species <- read_csv("../data/species.csv")
+surveys <- read_csv("../data/surveys.csv")
+dm(plots, species, surveys) |> 
+  dm_add_pk(plots, plot_id) |> 
+  dm_add_pk(surveys, record_id) |> 
+  dm_add_pk(species, species_id) |>
+  dm_add_fk(surveys, plot_id, plots) |> 
+  dm_add_fk(surveys, species_id, species) |>
+  dm_draw(rankdir = "LR", view_type = "all") 
+```
+
+
+
+
+
+
+::: aside
+
+Ernest, Morgan; Brown, James; Valone, Thomas; White, Ethan P. (2018). Portal Project Teaching Database. figshare. Dataset. https://doi.org/10.6084/m9.figshare.1314459.v10
+
+:::
+
+## Primary key
+
+## Foreign key
+
+## Relationships 
+
+- One-to-one 
+- One-to-many
+- Many-to-many
+
+
+# Mutating join
+
+
+
+
+
+
+
 
 ## Summary
+
+- **Relational data** consists of multiple, linked tables.
+- **Primary keys** uniquely identify each record in a table.
+- **Foreign keys** link tables together.
+
+::: {.panel-tabset style="font-size:0.65em;"}
+
+## Left join
+
+<center>
+
+![](images/left-join.gif)
+
+</center>
+
+## Left join (extra)
+
+<center>
+
+![](images/left-join-extra.gif)
+
+</center>
+
+## Right join
+
+<center>
+
+![](images/right-join.gif)
+
+</center>
+
+## Semi join
+
+<center>
+
+![](images/semi-join.gif)
+
+</center>
+
+## Set diff
+
+![](images/setdiff.gif)
+
+## Set diff (reverse)
+
+<center>
+
+![](images/setdiff-rev.gif)
+
+</center>
+
+
+## Anti join
+
+<center>
+
+![](images/anti-join.gif)
+
+</center>
+
+## Full join
+
+<center>
+
+![](images/full-join.gif)
+</center>
+
+
+## Inner join
+
+<center>
+
+![](images/inner-join.gif)
+</center>
+
+## Intersect
+
+<center>
+
+![](images/intersect.gif)
+</center>
+
+
+
+:::
 
 
 # Exercise time {background-color="#F5EDDE"}
