@@ -12,3 +12,11 @@ format:
 #| include: false
 library(webexercises)
 ```
+
+
+```{r}
+library(agridat)
+aastveit.barley.covs
+```
+
+- medicaldata
