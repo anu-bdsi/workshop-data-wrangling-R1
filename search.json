@@ -46,42 +46,56 @@
     "href": "slides/slide4.html#current-learning-objective",
     "title": "Joining two datasets",
     "section": " Current learning objective",
-    "text": "Current learning objective\n\n\n-Recognize the characteristics of tidy data\n\n\n-Differentiate between the Base and Tidyverse paradigms\n\n\n-Acquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using dplyr\n\n\n-Pivot data into longer or wider format using tidyr\n\n\nJoin datasets using dplyr"
+    "text": "Current learning objective\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n-Recognize the characteristics of tidy data\n\n\n-Differentiate between the Base and Tidyverse paradigms\n\n\n-Acquire the skills to add/modify columns, subset data by rows and columns, rename column names, and perform group operations using dplyr\n\n\n-Pivot data into longer or wider format using tidyr\n\n\nJoin datasets using dplyr"
   },
   {
-    "objectID": "slides/slide4.html#relational-data-models",
-    "href": "slides/slide4.html#relational-data-models",
+    "objectID": "slides/slide4.html#relational-model",
+    "href": "slides/slide4.html#relational-model",
     "title": "Joining two datasets",
-    "section": "Relational data models",
-    "text": "Relational data models\n\nRelational database consists of multiple, linked tables.\nIn tidy data, we considered each:\n\nvariable is a column, and\nobservation is a row.\n\nIn relational data model,\n\ncolumn is often referred to as attribute or field, and\nrow is often referred to as tuple or record."
-  },
-  {
-    "objectID": "slides/slide4.html#portals-database",
-    "href": "slides/slide4.html#portals-database",
-    "title": "Joining two datasets",
-    "section": "Portals database",
-    "text": "Portals database\n\n\n\n\n\n\n\nErnest, Morgan; Brown, James; Valone, Thomas; White, Ethan P. (2018). Portal Project Teaching Database. figshare. Dataset. https://doi.org/10.6084/m9.figshare.1314459.v10"
+    "section": "Relational model",
+    "text": "Relational model\n\n\n\n\n\n\n\n\n\n\nA relational model organizes data into one or more tables of columns and rows, with a unique key identifying each row based on Codd (1969, 1970).\nGenerally, each table represents one entity type.\nRelational database is a database based on the relational model of data.\n\n\n\n\n\nType\nTidy data\nRelational model\n\n\n\n\nvariable\ncolumn\nattribute/field\n\n\nobservation\nrow\ntuple/record\n\n\n\n\n\n\n\n\nCodd, E.F (1969), Derivability, Redundancy, and Consistency of Relations Stored in Large Data Banks, Research Report, IBM.\nCodd, E.F (1970). “A Relational Model of Data for Large Shared Data Banks”. Communications of the ACM. Classics. 13 (6): 377–87. doi:10.1145/362384.362685. S2CID 207549016. Archived from the original on 2007-06-12."
   },
   {
     "objectID": "slides/slide4.html#primary-key",
     "href": "slides/slide4.html#primary-key",
     "title": "Joining two datasets",
     "section": "Primary key",
-    "text": "Primary key"
+    "text": "Primary key\n\n\n\nA primary key (sometimes called candidate key) is the smallest subset of columns that uniquely identifies each row in a table.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\n\n\n\n\nData from Ernest, Morgan; Brown, James; Valone, Thomas; White, Ethan P. (2018). Portal Project Teaching Database. figshare. Dataset. https://doi.org/10.6084/m9.figshare.1314459.v10"
+  },
+  {
+    "objectID": "slides/slide4.html#simple-key-compound-key",
+    "href": "slides/slide4.html#simple-key-compound-key",
+    "title": "Joining two datasets",
+    "section": "Simple key & Compound key",
+    "text": "Simple key & Compound key\n\n\n\nIf only a single column then it is called a simple key.\nIf a key consists of more than one column then it is called a compound key.\nA table can also have no key (violating the relational model).\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/slide4.html#foreign-key",
     "href": "slides/slide4.html#foreign-key",
     "title": "Joining two datasets",
     "section": "Foreign key",
-    "text": "Foreign key"
+    "text": "Foreign key\n\n\n\nA foreign key is a column in one table that uniquely identifies a row in another table.\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "slides/slide4.html#joining-tables",
+    "href": "slides/slide4.html#joining-tables",
+    "title": "Joining two datasets",
+    "section": "Joining tables",
+    "text": "Joining tables\n\nTo join tables, we use the primary key in one table and the foreign key in another table.\nIn a relational model, a database has referential integrity if all relations between tables are valid. E.g.,\n\nAll primary key values must be unique and not missing.\nEach foreign key value must have a corresponding primary key value.\n\nIn a relational model, normalization aims to keep data organization as clean and simple as possible by avoiding redundant data entries."
   },
   {
     "objectID": "slides/slide4.html#relationships",
     "href": "slides/slide4.html#relationships",
     "title": "Joining two datasets",
     "section": "Relationships",
-    "text": "Relationships\n\nOne-to-one\nOne-to-many\nMany-to-many"
+    "text": "Relationships\n\nOne-to-one\nOne-to-many\nMany-to-one\nMany-to-many"
+  },
+  {
+    "objectID": "slides/slide4.html#joins-from-dplyr",
+    "href": "slides/slide4.html#joins-from-dplyr",
+    "title": "Joining two datasets",
+    "section": "Joins from dplyr",
+    "text": "Joins from dplyr\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "slides/slide4.html#summary",
