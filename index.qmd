@@ -28,7 +28,7 @@ Please ensure that you download and install
 - the following packages by opening RStudio Desktop, then copy and paste the command below in the Console section, pushing Enter after pasting.
 
 ```r
-install.packages(c("tidyverse", "rmarkdown", "janitor", "agridat"))
+install.packages(c("tidyverse", "agridat"))
 ```
 
 {{< fa hand-holding-medical >}} If you are having issues, see also [here](https://learnr.numbat.space/chapter1) or talk to the teaching team.
@@ -48,7 +48,9 @@ We use Slack to facilitate communication between workshop participants and the t
 - You must use your ANU email to sign up. 
 - Use your full name. 
 - By joining, you agree to abide by this [**code of conduct**](/slack.html).
+- Please **don't direct message the teaching team** in Slack. Your questions are more likely to be answered in the Slack channels rather than in direct messages.
 
+Please note that the teaching team does not necessarily actively monitor or attend to the Slack workspace outside of the workshop.
 :::
 
 ## Teaching team 
