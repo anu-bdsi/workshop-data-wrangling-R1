@@ -3374,6 +3374,7 @@ margin: 1em 0;
 <pre class="{webr-r}"><code>library(agridat) # loads the data
 aastveit.barley.covs
 ?aastveit.barley.covs # to see documentation</code></pre>
+<p><span class="citation" data-cites="aastveitANOVAInteractionsInterpreted1986a">@aastveitANOVAInteractionsInterpreted1986a</span></p>
 <div class="cell">
 <div id="tbl-barley1" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -3635,6 +3636,7 @@ Table 1: Barley heights and environmental covariates in Norway
 </figure>
 </div>
 </div>
+<p><img src="images/aastveit-table4.png" class="img-fluid"></p>
 <ul>
 <li>The data presented in <a href="#tbl-barley1" class="quarto-xref">Table 1</a> is contained in the data <code>aastveit.barley.covs</code>. Transform this data into a longer format like in <a href="#tbl-barley2" class="quarto-xref">Table 2</a>. Hint: <code>str_replace()</code> can be used to replace letters.</li>
 </ul>
@@ -3650,6 +3652,7 @@ Table 2: The first 10 rows after transforming to longer format from <a href="#t
 <thead>
 <tr class="header">
 <th style="text-align: right;" data-quarto-table-cell-role="th">year</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sowing_day</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">period</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">rainfall</th>
 </tr>
@@ -3657,53 +3660,150 @@ Table 2: The first 10 rows after transforming to longer format from <a href="#t
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: left;">P1</td>
 <td style="text-align: right;">0.00</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: left;">P2</td>
 <td style="text-align: right;">0.16</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: left;">P3</td>
 <td style="text-align: right;">1.59</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: left;">P4</td>
 <td style="text-align: right;">2.65</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: left;">P5</td>
 <td style="text-align: right;">1.70</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: left;">P6</td>
 <td style="text-align: right;">2.21</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
 <td style="text-align: left;">P1</td>
 <td style="text-align: right;">1.66</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
 <td style="text-align: left;">P2</td>
 <td style="text-align: right;">1.84</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
 <td style="text-align: left;">P3</td>
 <td style="text-align: right;">1.68</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
 <td style="text-align: left;">P4</td>
 <td style="text-align: right;">0.08</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<div id="tbl-barley3" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-barley3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 3: The first 10 rows after transforming to longer format from <a href="#tbl-barley1" class="quarto-xref">Table 1</a>.
+</figcaption>
+<div aria-describedby="tbl-barley3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">year</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sowing_day</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">period</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">solar_radiation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">P1</td>
+<td style="text-align: right;">2.26</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">P2</td>
+<td style="text-align: right;">2.74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">P3</td>
+<td style="text-align: right;">2.57</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">P4</td>
+<td style="text-align: right;">2.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">P5</td>
+<td style="text-align: right;">2.67</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">P6</td>
+<td style="text-align: right;">2.36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">P1</td>
+<td style="text-align: right;">1.94</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">P2</td>
+<td style="text-align: right;">1.85</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">P3</td>
+<td style="text-align: right;">2.37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1975</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">P4</td>
+<td style="text-align: right;">3.02</td>
 </tr>
 </tbody>
 </table>

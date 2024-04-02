@@ -22,6 +22,8 @@ aastveit.barley.covs
 ?aastveit.barley.covs # to see documentation
 ```
 
+@aastveitANOVAInteractionsInterpreted1986a
+
 ```{r}
 #| label: tbl-barley1
 #| tbl-cap: "Barley heights and environmental covariates in Norway"
@@ -29,6 +31,8 @@ aastveit.barley.covs
 aastveit.barley.covs |> 
   knitr::kable()
 ```
+
+![](images/aastveit-table4.png)
 
 
 - The data presented in @tbl-barley1 is contained in the data `aastveit.barley.covs`. Transform this data into a longer format like in @tbl-barley2. Hint: `str_replace()` can be used to replace letters.
@@ -39,8 +43,8 @@ aastveit.barley.covs |>
 #| label: tbl-barley2
 #| tbl-cap: "The first 10 rows after transforming to longer format from @tbl-barley1."
 aastveit.barley.covs |> 
-  select(year, starts_with("R")) |> 
-  pivot_longer(cols = -year, names_to = "period", values_to = "rainfall") |> 
+  select(year, sowing_day = ST, starts_with("R")) |> 
+  pivot_longer(cols = -c(year, sowing_day), names_to = "period", values_to = "rainfall") |> 
   mutate(period = str_replace(period, "R", "P")) |>
   head(10) |> 
   knitr::kable() |> 
@@ -48,6 +52,19 @@ aastveit.barley.covs |>
 ```
 
 
+
+```{r}
+#| echo: false
+#| label: tbl-barley3
+#| tbl-cap: "The first 10 rows after transforming to longer format from @tbl-barley1."
+aastveit.barley.covs |> 
+  select(year, sowing_day = ST, num_range("S", 1:6)) |> 
+  pivot_longer(cols = -c(year, sowing_day), names_to = "period", values_to = "solar_radiation") |> 
+  mutate(period = str_replace(period, "S", "P")) |>
+  head(10) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling(full_width = FALSE)
+```
 
 
 

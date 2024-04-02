@@ -9,6 +9,7 @@ format:
       - assets/webex.css
       - assets/custom.css
     include-after-body: assets/webex.js
+bibliography: ref.bib
 filters:
   - webr2
 webr: 
