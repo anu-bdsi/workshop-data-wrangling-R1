@@ -11,5 +11,43 @@ format:
 ```{r}
 #| include: false
 library(webexercises)
+library(tidyverse)
+library(agridat)
+library(rmarkdown)
 ```
+
+```{webr-r}
+library(agridat) # loads the data
+aastveit.barley.covs
+?aastveit.barley.covs # to see documentation
+```
+
+```{r}
+#| label: tbl-barley1
+#| tbl-cap: "Barley heights and environmental covariates in Norway"
+#| echo: false
+aastveit.barley.covs |> 
+  knitr::kable()
+```
+
+
+- The data presented in @tbl-barley1 is contained in the data `aastveit.barley.covs`. Transform this data into a longer format like in @tbl-barley2. Hint: `str_replace()` can be used to replace letters.
+
+
+```{r}
+#| echo: false
+#| label: tbl-barley2
+#| tbl-cap: "The first 10 rows after transforming to longer format from @tbl-barley1."
+aastveit.barley.covs |> 
+  select(year, starts_with("R")) |> 
+  pivot_longer(cols = -year, names_to = "period", values_to = "rainfall") |> 
+  mutate(period = str_replace(period, "R", "P")) |>
+  head(10) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling(full_width = FALSE)
+```
+
+
+
+
 

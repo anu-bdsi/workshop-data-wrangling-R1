@@ -13,6 +13,9 @@ filters:
   - webr2
 webr: 
   show-startup-message: false    
+  packages:
+    - agridat
+    - tidyverse
 ---
 
 ```{r setup, include = FALSE}

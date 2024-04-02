@@ -330,7 +330,7 @@ mtcars |> filter(mpg > 20)
 
 ## Adding or modifying a column [(Tidyverse)]{.f2}
 
-```{r}
+```{webr-r}
 mtcars |> mutate(gpm = 1/mpg)
 mtcars |> mutate(engine = case_when(vs==0 ~ "V-shaped",
                                     vs==1 ~ "Straight"),
