@@ -11,9 +11,102 @@ format:
 ```{r}
 #| include: false
 library(webexercises)
+library(medicaldata)
+library(agridat)
+library(tidyverse)
+tab1 <- smartpill |> 
+  summarise(mean = mean(GE.Time, na.rm = TRUE), 
+            sd = sd(GE.Time, na.rm = TRUE),
+            n = sum(!is.na(GE.Time)), .by = Group)
+
+tab2 <- strep_tb |> 
+  count(baseline_condition, .by = gender)
+
+tab3 <- aastveit.barley.covs |> 
+  group_by(year) |> 
+  summarise(total_rainfall = sum(c_across(starts_with("R"))))
+
+```
+
+```{webr-r}
+library(medicaldata)
+library(agridat)
+help(smartpill)
+help(strep_tb)
+help(aastveit.barley.covs)
 ```
 
 
+- Use the `smartpill` data from the `medicaldata` package to complete @tbl-transit by filling in the missing values. 
 
 
-- medicaldata
+| Group | Mean | SD | N | 
+|-------|-----------|---|---|
+| Critically ill trauma patients | `r fitb(tab1$mean[1], tol = 0.01)` | `r fitb(tab1$sd[1], tol = 0.001)`   | `r fitb(tab1$n[1])`|
+| Healthy volunteer | `r fitb(tab1$mean[2], tol = 0.01)` | `r fitb(tab1$sd[2], tol = 0.001)` | `r fitb(tab1$n[1])`|
+
+: The table below shows the mean, sample standard deviation, and the total observed (non-missing) samples of gastric emptying transit time by two groups (critically ill trauma patients and healthy volunteers). {#tbl-transit}
+
+
+`r hide("Hint")`
+
+```{webr-r}
+library(medicaldata)
+smartpill |> 
+  summarise(Mean = ____, 
+            SD = sd(____),
+            N = ___(!is.na(GE.Time)), 
+            .by = ____)
+```
+
+
+`r unhide()`
+
+- Using the `strep_tb` data in the `medicaldata` package, calculate the number of patients in each baseline condition by gender. Using this calculation, fill in the missing values in @tbl-strep.
+
+| Baseline condition | Gender | N | 
+| --- | --- | --- |
+| Good | Female | `r fitb(tab2$n[1])` |
+| Good | Male | `r fitb(tab2$n[2])` |
+| Fair | Female | `r fitb(tab2$n[3])` |
+| Fair | Male | `r fitb(tab2$n[4])` |
+| Poor | Female | `r fitb(tab2$n[5])` |
+| Poor | Male | `r fitb(tab2$n[6])` |
+
+: The table below shows the number of patients in each baseline condition by gender. {#tbl-strep}
+
+`r hide("Hint")`
+
+```{webr-r}
+library(medicaldata)
+strep_tb |> 
+  count(____)
+```
+
+`r unhide()`
+
+- Using the `aastveit.barley.covs` from the `agridat` package, calculate the total rainfall for each year and then fill out the missing values in the table below.
+
+
+| Year | Total Rainfall |
+|------|----------------|
+| 1974 | `r fitb(tab3$total_rainfall[1])` |
+| 1975 | `r fitb(tab3$total_rainfall[2])` |
+| 1976 | `r fitb(tab3$total_rainfall[3])` |
+| 1977 | `r fitb(tab3$total_rainfall[4])` |
+| 1978 | `r fitb(tab3$total_rainfall[5])` |
+| 1979 | `r fitb(tab3$total_rainfall[6])` |
+| 1980 | `r fitb(tab3$total_rainfall[7])` |
+| 1981 | `r fitb(tab3$total_rainfall[8])` |
+| 1982 | `r fitb(tab3$total_rainfall[9])` |
+
+
+`r hide("Hint")`
+
+```{webr-r}
+library(agridat)
+aastveit.barley.covs |> 
+  ___(total_rainfall = ___, .by = ___)
+```
+
+`r unhide()`

@@ -13,58 +13,77 @@ format:
 library(webexercises)
 library(tidyverse)
 library(agridat)
-library(rmarkdown)
 ```
 
 ```{webr-r}
 library(agridat) # loads the data
-aastveit.barley.covs
-?aastveit.barley.covs # to see documentation
+help(crampton.pig)
+help(aastveit.barley.covs) 
 ```
 
-@aastveitANOVAInteractionsInterpreted1986a
+
+- Transform the `crampton.pig` data from `agridat` package into the format as shown in @tbl-pig.
 
 ```{r}
-#| label: tbl-barley1
-#| tbl-cap: "Barley heights and environmental covariates in Norway"
+#| label: tbl-pig
+#| tbl-cap: "Weight gain in pigs for different treatments."
 #| echo: false
-aastveit.barley.covs |> 
-  knitr::kable()
+crampton.pig |> 
+  rename(initial = weight1, 
+         final = weight2) |> 
+  pivot_longer(c(initial, final), names_to = "period", values_to = "weight") |> 
+  DT::datatable()
 ```
 
-![](images/aastveit-table4.png)
+`r hide("Hint")`
+
+```{webr-r}
+crampton.pig |> 
+  rename(initial = ____, 
+         final = ___) |> 
+  pivot____(___, names_to = "period", values_to = "weight") 
+```
 
 
-- The data presented in @tbl-barley1 is contained in the data `aastveit.barley.covs`. Transform this data into a longer format like in @tbl-barley2. Hint: `str_replace()` can be used to replace letters.
+`r unhide()`
+
+
+![Table 4 from @aastveitANOVAInteractionsInterpreted1986a](images/aastveit-table4.png){#fig-table4}
+
+- @fig-table4 shows the data contained in `aastveit.barley.covs` from the `agridat` package. Transform this data into a longer format like in @tbl-barley. 
+
+
+
+
+
+
 
 
 ```{r}
 #| echo: false
-#| label: tbl-barley2
-#| tbl-cap: "The first 10 rows after transforming to longer format from @tbl-barley1."
+#| label: tbl-barley
+#| tbl-cap: "The  data from @fig-table4 transformed to a longer format."
 aastveit.barley.covs |> 
-  select(year, sowing_day = ST, starts_with("R")) |> 
-  pivot_longer(cols = -c(year, sowing_day), names_to = "period", values_to = "rainfall") |> 
-  mutate(period = str_replace(period, "R", "P")) |>
-  head(10) |> 
-  knitr::kable() |> 
-  kableExtra::kable_styling(full_width = FALSE)
+  pivot_longer(-c(year, ST), names_to = c("trait", "period"), names_sep = 1) |>
+  pivot_wider(names_from = trait, values_from = value) |> 
+  rename(rainfall = R,
+         solar_radiation = S,
+         temperature = T,
+         sowing_time = ST) |> 
+  DT::datatable()
+```
+
+`r hide("Hint")`
+
+```{webr-r}
+aastveit.barley.covs |> 
+  pivot_longer(___, names_to = c("trait", "period"), names_sep = 1) |>
+  ____(names_from = trait, values_from = value) |> 
+  rename(rainfall = R,
+         solar_radiation = S,
+         temperature = T,
+         sowing_time = ST)
 ```
 
 
-
-```{r}
-#| echo: false
-#| label: tbl-barley3
-#| tbl-cap: "The first 10 rows after transforming to longer format from @tbl-barley1."
-aastveit.barley.covs |> 
-  select(year, sowing_day = ST, num_range("S", 1:6)) |> 
-  pivot_longer(cols = -c(year, sowing_day), names_to = "period", values_to = "solar_radiation") |> 
-  mutate(period = str_replace(period, "S", "P")) |>
-  head(10) |> 
-  knitr::kable() |> 
-  kableExtra::kable_styling(full_width = FALSE)
-```
-
-
-
+`r unhide()`

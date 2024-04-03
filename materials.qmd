@@ -16,6 +16,7 @@ webr:
   show-startup-message: false    
   packages:
     - agridat
+    - medicaldata
     - tidyverse
 ---
 
@@ -107,12 +108,7 @@ content |>
 
 `r checklist(LOs[4])`
 
-## Exercise 4
 
-{{< include "exercises/_exercise4.qmd" >}}
-
-`r checklist(LOs[5])`
-## Exercise 4
 
 
 :::

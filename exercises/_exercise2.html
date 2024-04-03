@@ -3147,9 +3147,191 @@ margin: 1em 0;
 
 
 
+<pre class="{webr-r}"><code>library(medicaldata)
+library(agridat)
+help(smartpill)
+help(strep_tb)
+help(aastveit.barley.covs)</code></pre>
 <ul>
-<li>medicaldata</li>
+<li>Use the <code>smartpill</code> data from the <code>medicaldata</code> package to complete <a href="#tbl-transit" class="quarto-xref">Table 1</a> by filling in the missing values.</li>
 </ul>
+<div id="tbl-transit" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-transit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 1: The table below shows the mean, sample standard deviation, and the total observed (non-missing) samples of gastric emptying transit time by two groups (critically ill trauma patients and healthy volunteers).
+</figcaption>
+<div aria-describedby="tbl-transit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 45%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Group</th>
+<th>Mean</th>
+<th>SD</th>
+<th>N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Critically ill trauma patients</td>
+<td><input class="webex-solveme nospaces" data-tol="0.01" size="16" data-answer="[&quot;28.8857142857143&quot;]"></td>
+<td><input class="webex-solveme nospaces" data-tol="0.001" size="16" data-answer="[&quot;31.3445597922738&quot;]"></td>
+<td><input class="webex-solveme nospaces" size="1" data-answer="[&quot;7&quot;]"></td>
+</tr>
+<tr class="even">
+<td>Healthy volunteer</td>
+<td><input class="webex-solveme nospaces" data-tol="0.01" size="16" data-answer="[&quot;3.53247058823529&quot;]"></td>
+<td><input class="webex-solveme nospaces" data-tol="0.001" size="16" data-answer="[&quot;2.05844133467323&quot;]"></td>
+<td><input class="webex-solveme nospaces" size="1" data-answer="[&quot;7&quot;]"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<pre class="{webr-r}"><code>library(medicaldata)
+smartpill |&gt; 
+  summarise(Mean = ____, 
+            SD = sd(____),
+            N = ___(!is.na(GE.Time)), 
+            .by = ____)</code></pre>
+</div>
+<ul>
+<li>Using the <code>strep_tb</code> data in the <code>medicaldata</code> package, calculate the number of patients in each baseline condition by gender. Using this calculation, fill in the missing values in <a href="#tbl-strep" class="quarto-xref">Table 2</a>.</li>
+</ul>
+<div id="tbl-strep" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-strep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 2: The table below shows the number of patients in each baseline condition by gender.
+</figcaption>
+<div aria-describedby="tbl-strep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Baseline condition</th>
+<th>Gender</th>
+<th>N</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Good</td>
+<td>Female</td>
+<td><input class="webex-solveme nospaces" size="1" data-answer="[&quot;8&quot;]"></td>
+</tr>
+<tr class="even">
+<td>Good</td>
+<td>Male</td>
+<td><input class="webex-solveme nospaces" size="1" data-answer="[&quot;8&quot;]"></td>
+</tr>
+<tr class="odd">
+<td>Fair</td>
+<td>Female</td>
+<td><input class="webex-solveme nospaces" size="2" data-answer="[&quot;20&quot;]"></td>
+</tr>
+<tr class="even">
+<td>Fair</td>
+<td>Male</td>
+<td><input class="webex-solveme nospaces" size="2" data-answer="[&quot;17&quot;]"></td>
+</tr>
+<tr class="odd">
+<td>Poor</td>
+<td>Female</td>
+<td><input class="webex-solveme nospaces" size="2" data-answer="[&quot;31&quot;]"></td>
+</tr>
+<tr class="even">
+<td>Poor</td>
+<td>Male</td>
+<td><input class="webex-solveme nospaces" size="2" data-answer="[&quot;23&quot;]"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<pre class="{webr-r}"><code>library(medicaldata)
+strep_tb |&gt; 
+  count(____)</code></pre>
+</div>
+<ul>
+<li>Using the <code>aastveit.barley.covs</code> from the <code>agridat</code> package, calculate the total rainfall for each year and then fill out the missing values in the table below.</li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Year</th>
+<th>Total Rainfall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1974</td>
+<td><input class="webex-solveme nospaces" size="4" data-answer="[&quot;8.31&quot;]"></td>
+</tr>
+<tr class="even">
+<td>1975</td>
+<td><input class="webex-solveme nospaces" size="4" data-answer="[&quot;5.29&quot;]"></td>
+</tr>
+<tr class="odd">
+<td>1976</td>
+<td><input class="webex-solveme nospaces" size="4" data-answer="[&quot;6.14&quot;]"></td>
+</tr>
+<tr class="even">
+<td>1977</td>
+<td><input class="webex-solveme nospaces" size="5" data-answer="[&quot;12.45&quot;]"></td>
+</tr>
+<tr class="odd">
+<td>1978</td>
+<td><input class="webex-solveme nospaces" size="4" data-answer="[&quot;12.7&quot;]"></td>
+</tr>
+<tr class="even">
+<td>1979</td>
+<td><input class="webex-solveme nospaces" size="5" data-answer="[&quot;11.89&quot;]"></td>
+</tr>
+<tr class="odd">
+<td>1980</td>
+<td><input class="webex-solveme nospaces" size="5" data-answer="[&quot;17.72&quot;]"></td>
+</tr>
+<tr class="even">
+<td>1981</td>
+<td><input class="webex-solveme nospaces" size="5" data-answer="[&quot;15.48&quot;]"></td>
+</tr>
+<tr class="odd">
+<td>1982</td>
+<td><input class="webex-solveme nospaces" size="5" data-answer="[&quot;14.49&quot;]"></td>
+</tr>
+</tbody>
+</table>
+<div class="webex-solution">
+<button>
+Hint
+</button>
+<pre class="{webr-r}"><code>library(agridat)
+aastveit.barley.covs |&gt; 
+  ___(total_rainfall = ___, .by = ___)</code></pre>
+</div>
 
 </main>
 <!-- /main column -->

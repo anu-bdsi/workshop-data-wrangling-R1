@@ -28,7 +28,7 @@ Please ensure that you download and install
 - the following packages by opening RStudio Desktop, then copy and paste the command below in the Console section, pushing Enter after pasting.
 
 ```r
-install.packages(c("tidyverse", "agridat"))
+install.packages(c("tidyverse", "agridat", "medicaldata"))
 ```
 
 {{< fa hand-holding-medical >}} If you are having issues, see also [here](https://learnr.numbat.space/chapter1) or talk to the teaching team.
