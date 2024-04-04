@@ -27,6 +27,12 @@ execute:
 
 # Welcome 👋
 
+```{r}
+#| include: false
+library(tidyverse)
+source("setup.R")
+```
+
 
 ## Teaching team 
 
@@ -43,6 +49,39 @@ execute:
 All materials will be hosted at<br> [<https://anu-bdsi.github.io/workshop-data-wrangling-R1/>]{.f1 target="_blank"}
 
 :::
+
+![](/images/website-qr-code.png)
+
+## 🕙 Schedule
+
+```{r}
+#| echo: false
+ex_tabset <- function(id) {
+  paste0("_Exercise ", id, "_")
+}
+
+slide_title <- function(id) {
+ paste0("**", rmarkdown::yaml_front_matter(paste0("slide", id, ".qmd"))$title, "**")
+}
+
+start <- dmy_hms("03/04/2024 10.00.00")
+timedisplay <- function(duration) {
+  end <- start + duration(duration, units = "minutes")
+  ret <- paste0(format(start, "%H:%M"), "--", format(end, "%H:%M"))
+  start <<- end
+  ret
+}
+
+content |> 
+  rowwise() |> 
+  mutate(Time = timedisplay(time)) |> 
+  mutate(Content = switch(type,
+                              "exercise" = ex_tabset(content_id),
+                              "slide" = slide_title(content_id),
+                               type)) |>
+  select(Time, Content) |> 
+  knitr::kable()
+```
 
 ## Today's learning objectives 
 
