@@ -42,10 +42,10 @@ help(aastveit.barley.covs)
 
 | Group | Mean | SD | N | 
 |-------|-----------|---|---|
-| Critically ill trauma patients | `r fitb(tab1$mean[1], tol = 0.01)` | `r fitb(tab1$sd[1], tol = 0.001)`   | `r fitb(tab1$n[1])`|
-| Healthy volunteer | `r fitb(tab1$mean[2], tol = 0.01)` | `r fitb(tab1$sd[2], tol = 0.001)` | `r fitb(tab1$n[1])`|
+| Critically ill trauma patients | `r fitb(round(tab1$mean[1], 2))` | `r fitb(round(tab1$sd[1], 3))`   | `r fitb(tab1$n[1])`|
+| Healthy volunteer | `r fitb(round(tab1$mean[2], 2))` | `r fitb(round(tab1$sd[2], 3))` | `r fitb(tab1$n[2])`|
 
-: The table below shows the mean, sample standard deviation, and the total observed (non-missing) samples of gastric emptying transit time by two groups (critically ill trauma patients and healthy volunteers). {#tbl-transit}
+: The table below shows the mean (to 2 decimal places), sample standard deviation  (to 3 decimal places), and the total observed (non-missing) samples of gastric emptying transit time by two groups (critically ill trauma patients and healthy volunteers). {#tbl-transit}
 
 
 `r hide("Hint")`
