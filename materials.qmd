@@ -92,6 +92,8 @@ content |>
 
 {{< include "exercises/_exercise1.qmd" >}}
 
+Download spreadsheet <a download href="exercises/exercise1-printout.pdf">here</a>.
+
 `r checklist(LOs[1])`
 
 ## Exercise 2
